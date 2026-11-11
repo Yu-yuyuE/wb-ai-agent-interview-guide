@@ -48,13 +48,19 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:"Segoe UI","Micro
 #search:focus{border-color:var(--accent)}
 #toc{flex:1;overflow:auto;padding:4px 12px 40px 16px;font-size:13px}
 #toc ul{list-style:none;margin:0;padding-left:14px}
-#toc>ul{padding-left:0}
-#toc li{margin:1px 0}
+#toc .toc>ul{padding-left:0}
+#toc li{position:relative;margin:1px 0}
+#toc li.collapsed>ul{display:none}
+#toc .tw{position:absolute;left:-13px;top:2px;width:14px;height:22px;padding:0;border:0;background:none;color:var(--muted);font-size:11px;line-height:22px;text-align:center;cursor:pointer;z-index:1}
+#toc .tw:hover{color:var(--accent)}
 #toc a{display:block;color:var(--muted);text-decoration:none;padding:3px 8px;border-radius:6px;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #toc a:hover{color:var(--fg);background:var(--panel2)}
-#toc>ul>li>a{color:var(--fg);font-weight:600;margin-top:8px}
+#toc .toc>ul>li>a{color:var(--fg);font-weight:600;margin-top:8px}
 #toc a.active{color:var(--accent);border-left-color:var(--accent);background:rgba(122,167,255,.09)}
 #toc li.hide{display:none}
+.toctools{display:flex;gap:8px;padding:0 16px 8px}
+.toctools button{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:11.5px;padding:5px 0;cursor:pointer}
+.toctools button:hover{color:var(--accent);border-color:var(--accent)}
 #main{margin-left:340px;padding:38px 0 120px;max-width:none}
 #main .wrap{max-width:1180px;margin:0 auto;padding:0 36px}
 #main h1{font-size:30px;line-height:1.4;margin:44px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line);scroll-margin-top:20px}
@@ -90,18 +96,43 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:"Segoe UI","Micro
 """
 
 JS = """
+const tocRoot=document.getElementById('toc');
 const search=document.getElementById('search');
-const items=[...document.querySelectorAll('#toc li')];
+const items=[...tocRoot.querySelectorAll('li')];
+const branches=items.filter(li=>li.querySelector(':scope > ul'));
+function setOpen(li,open){
+  li.classList.toggle('collapsed',!open);
+  const b=li.querySelector(':scope > .tw');
+  if(b){b.textContent=open?'▾':'▸';b.setAttribute('aria-expanded',open?'true':'false');b.title=open?'折叠本章节':'展开本章节';}
+}
+branches.forEach(li=>{
+  const b=document.createElement('button');
+  b.type='button';b.className='tw';b.setAttribute('aria-label','展开或折叠章节');
+  li.insertBefore(b,li.firstChild);
+  b.addEventListener('click',e=>{e.stopPropagation();setOpen(li,li.classList.contains('collapsed'));});
+  setOpen(li,false);
+});
+function expandAll(){branches.forEach(li=>setOpen(li,true));}
+function collapseAll(){branches.forEach(li=>setOpen(li,false));}
+document.getElementById('expandAll').addEventListener('click',expandAll);
+document.getElementById('collapseAll').addEventListener('click',collapseAll);
+let snapshot=null;
 search.addEventListener('input',()=>{
   const q=search.value.trim().toLowerCase();
+  if(q!==''&&snapshot===null){snapshot=branches.map(li=>li.classList.contains('collapsed'));expandAll();}
+  if(q===''&&snapshot!==null){branches.forEach((li,i)=>setOpen(li,!snapshot[i]));snapshot=null;}
   items.forEach(li=>{
-    const a=li.querySelector(':scope > a');
-    li.classList.toggle('hide', q!=='' && !(a && a.textContent.toLowerCase().includes(q)));
+    const match=[...li.querySelectorAll('a')].some(a=>a.textContent.toLowerCase().includes(q));
+    li.classList.toggle('hide',q!==''&&!match);
   });
-  if(q!==''){items.forEach(li=>{if(!li.classList.contains('hide')){li.parentElement && (li.parentElement.style.display='block');}});}
 });
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();search.focus();}});
-const links=[...document.querySelectorAll('#toc a')];
+tocRoot.addEventListener('click',e=>{
+  const a=e.target.closest('a');if(!a)return;
+  let p=a.parentElement;
+  while(p&&p!==tocRoot){if(p.tagName==='LI'&&p.classList.contains('collapsed'))setOpen(p,true);p=p.parentElement;}
+});
+const links=[...tocRoot.querySelectorAll('a')];
 const heads=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
 function onScroll(){let cur=null;for(const h of heads){if(h.getBoundingClientRect().top<=120)cur=h;else break;}
   links.forEach(a=>a.classList.toggle('active',cur&&a.getAttribute('href')==='#'+cur.id));}
@@ -128,6 +159,7 @@ mermaid.initialize({{startOnLoad:true,theme:'dark'}});
 <div class="chips"><span class="chip">5 大图示部分</span><span class="chip">213 道原题</span><span class="chip">839 条考点</span><span class="chip">40 篇源文档</span></div>
 </header>
 <input id="search" placeholder="筛选目录（Ctrl+K）…" autocomplete="off">
+<div class="toctools"><button id="expandAll" type="button">展开全部</button><button id="collapseAll" type="button">折叠全部</button></div>
 <nav id="toc">{toc}</nav></aside>
 <main id="main"><div class="wrap">{body}</div></main>
 <button id="top" title="回到顶部">↑</button>
