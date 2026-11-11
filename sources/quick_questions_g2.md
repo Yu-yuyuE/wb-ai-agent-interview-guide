@@ -1,0 +1,62 @@
+# 第二部分 · AI Agent（58 题）
+
+> 答案素材：notes/part2-agent.md；也可在 `AI-Agent面试指南.md` 中用 Grep 查原题详解。
+
+- `J2-01` AI Agent 是什么？和普通 Chatbot 有什么区别？
+- `J2-02` Agent = LLM + Planning + Memory + Tools 这条公式怎么理解？
+- `J2-03` Agent Loop 的完整流程是什么？
+- `J2-04` Agent 和传统编程、Workflow 的核心区别是什么？
+- `J2-05` ReAct、Plan-and-Execute、Reflection、Multi-Agent 分别适合什么场景？
+- `J2-06` Tools 注册时，工具 description 为什么很关键？
+- `J2-07` 什么时候用纯 Agent，什么时候用 Workflow 或 Agentic Workflow？
+- `J2-08` Multi-Agent 协作的主要问题是什么？为什么生产里不能盲目上多 Agent？
+- `J2-09` Agent 的短期记忆和长期记忆有什么区别？
+- `J2-10` Agent 记忆系统要解决哪些核心问题？
+- `J2-11` 向量记忆和 Markdown 记忆分别适合什么场景？
+- `J2-12` Auto Memory 是什么？它为什么不能无限自动写入？
+- `J2-13` 哪些团队共享记忆适合走 Git 和 Code Review，哪些更适合数据库？
+- `J2-14` 记忆压缩、记忆过期、记忆冲突应该怎么处理？
+- `J2-15` 如何避免长期记忆污染上下文？
+- `J2-16` 面试里怎么讲“有记忆”不是简单保存聊天记录？
+- `J2-17` Prompt Engineering 和 Context Engineering 有什么区别？
+- `J2-18` Prompt 四要素 Role、Task、Context、Format 分别解决什么问题？
+- `J2-19` Few-Shot、CoT、任务分解、结构化输出分别适合什么场景？
+- `J2-20` Prompt 注入攻击是什么？常见防护方式有哪些？
+- `J2-21` 为什么 Agent 场景下只优化 Prompt 不够？
+- `J2-22` Context Engineering 要解决哪些问题？
+- `J2-23` 静态规则、动态信息、工具结果、记忆应该如何进入上下文？
+- `J2-24` 长任务上下文溢出时，Compaction、结构化笔记、Sub-agent 分别怎么用？
+- `J2-25` MCP 解决什么问题？为什么常被类比成 AI 领域的 USB-C？
+- `J2-26` MCP Client、MCP Server、Host 分别是什么？
+- `J2-27` MCP 的 Tools、Resources、Prompts 分别解决什么问题？
+- `J2-28` MCP 和 Function Calling 有什么区别？
+- `J2-29` 生产级 MCP Server 要做哪些安全治理？
+- `J2-30` Agent Skills 是什么？它和 Prompt、MCP、Function Calling 的边界是什么？
+- `J2-31` Skills 为什么要延迟加载？
+- `J2-32` Skill 路由怎么做？为什么它和 RAG 相似但目标不同？
+- `J2-33` 写一个 `SKILL.md` 最容易踩哪些坑？
+- `J2-34` Harness Engineering 是什么？它和 Prompt Engineering、Context Engineering 有什么关系？
+- `J2-35` 为什么说 Agent = Model + Harness？
+- `J2-36` JavaGuide AI Agent 专题归纳的 Harness 六层检查框架分别解决什么问题？
+- `J2-37` 模型能力升级后，Harness 里的某些机制为什么需要重新验证？
+- `J2-38` 上下文污染、代码熵积累、工具调用可靠性分别怎么治理？
+- `J2-39` Agent 工程里为什么需要评测器、验证器和任务状态管理？
+- `J2-40` 一线团队做 Agent 工程化时，共同遇到的难点是什么？
+- `J2-41` 为什么 AI 系统需要工作流？
+- `J2-42` Workflow、Graph、Loop 三者是什么关系？
+- `J2-43` Graph Loop 和 Agent Loop 有什么区别？
+- `J2-44` 外层 Loop 由谁触发下一轮：CI 事件、定时任务、目标检查还是人工审批？
+- `J2-45` 外层 Loop 与一次任务内部的 Agent Loop 有什么区别，状态和验证结果怎样交接？
+- `J2-46` 哪些任务不适合无人值守？缺少可靠验收信号、涉及高风险写操作或需要业务判断时，怎样停止并转人工？
+- `J2-47` Loop 如何防止死循环？
+- `J2-48` State 的更新策略怎么选？Replace、Append、Reducer 分别适合什么字段？
+- `J2-49` 条件边和动态路由有什么区别？
+- `J2-50` 工具调用失败时，哪些错误适合重试？认证失败和非幂等写操作怎么处理？
+- `J2-51` 工作流中断后怎么恢复？
+- `J2-52` 工作流有哪些特有的安全风险？
+- `J2-53` 如果让 Agent 完成一次需要调用多个工具的长任务，你会如何拆分执行步骤？
+- `J2-54` 哪些节点适合交给模型判断，哪些节点应该由规则或代码控制？
+- `J2-55` Agent 的计划、工具结果和中间状态如何保存？中断后怎样恢复？
+- `J2-56` 工具包含写操作时，权限、参数校验、二次确认和审计怎么设计？
+- `J2-57` 什么情况下需要 Multi-Agent？如何控制通信成本和状态一致性？
+- `J2-58` 你会记录哪些 Trace，并用哪些指标评估任务完成率、工具调用和执行轨迹？
