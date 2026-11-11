@@ -1,0 +1,86 @@
+[
+  {
+    "id": "LC-01",
+    "question": "1. 你了解过哪些 AI Agent 开发框架？",
+    "status": "missing",
+    "location": "—",
+    "gap": "无专门章节讲主流框架定位与选型，仅第三部分 §13 Q-A28 的 Java 框架能力边界、预测题 13–15 与附录 TODO 登记「待写」零星提及。"
+  },
+  {
+    "id": "LC-02",
+    "question": "2. 如何理解 LangChain 中的 Chain？",
+    "status": "missing",
+    "location": "—",
+    "gap": "全文 Chain 只指 CoT / Prompt Chain，无 Runnable、LCEL、RunnableSequence/Parallel 与旧式 Chain 迁移内容。"
+  },
+  {
+    "id": "LC-03",
+    "question": "3. LangChain 的底层架构与实现原理是什么？",
+    "status": "missing",
+    "location": "—",
+    "gap": "无 langchain-core 协议层、独立集成包、create_agent 编译 LangGraph 图、State/Context/Store/Middleware 等框架分层架构。"
+  },
+  {
+    "id": "LC-04",
+    "question": "4. 使用 LangChain 构建 Agent 的核心步骤是什么？",
+    "status": "partial",
+    "location": "第二部分 Q1–Q8、Q53–Q58；第三部分 §14–§19",
+    "gap": "有 Agent Loop、工具、结构化输出、稳定性、HITL、Trace 等通用工程步骤，缺 create_agent 七步主线与 system_prompt/response_format/checkpointer/store/middleware 入口。"
+  },
+  {
+    "id": "LC-05",
+    "question": "5. 在 LangChain 中，如何为 Agent 注册工具？",
+    "status": "partial",
+    "location": "第二部分 Q6；第一部分 3-4 / 3-9；第三部分 §14–§15",
+    "gap": "有工具 description、Function Calling 链路、八道检查与风险分级，缺 @tool、StructuredTool、BaseTool、args_schema、ToolRuntime 等框架实现。"
+  },
+  {
+    "id": "LC-06",
+    "question": "6. LangChain 如何实现短期记忆和长期记忆？",
+    "status": "partial",
+    "location": "第二部分 Q9–Q16",
+    "gap": "有短期/长期记忆区别与记忆治理整节，缺 State+thread_id+Checkpointer、namespace/key+Store、ToolRuntime 边界与旧 Memory 迁移。"
+  },
+  {
+    "id": "LC-07",
+    "question": "7. LangChain 和 LlamaIndex 有什么区别？",
+    "status": "missing",
+    "location": "—",
+    "gap": "第四部分是 RAG 系统知识非框架知识，LlamaIndex 仅作为工具名/GraphRAG 实现零星出现，无框架定位对比与 Query Engine/Index 数据抽象。"
+  },
+  {
+    "id": "LC-08",
+    "question": "8. LangChain4j 主要解决了哪些问题？",
+    "status": "missing",
+    "location": "—",
+    "gap": "仅【预测题 13】几句要点且 TODO 标注「待写」，缺 AI Services、ChatModel/EmbeddingModel/EmbeddingStore、ChatMemory、RetrievalAugmentor 与框架边界。"
+  },
+  {
+    "id": "LC-09",
+    "question": "9. LangChain 和 LangGraph 的核心区别是什么？",
+    "status": "partial",
+    "location": "第二部分 Q41–Q52（重点 Q42 / Q48 / Q49）",
+    "gap": "有 Workflow/Graph/Loop 整节与 LangGraph 具体 API 对照，缺高层 Agent 框架 vs 低层运行时的定位对比、create_agent 构建于 LangGraph 之上及 middleware 与图编排分工。"
+  },
+  {
+    "id": "LC-10",
+    "question": "10. LangGraph 相比于 LangChain 有哪些核心优势？",
+    "status": "partial",
+    "location": "第二部分 Q41–Q52（重点 Q42 / Q48 / Q49 / Q51）",
+    "gap": "有 State/Node/Edge/Reducer/中断恢复概念与部分 API，缺 interrupt()/Command(resume)、时间旅行、Functional API、durable execution 幂等与优势场景系统对比。"
+  },
+  {
+    "id": "LC-11",
+    "question": "11. LangChain 大版本升级有哪些核心变化？",
+    "status": "missing",
+    "location": "—",
+    "gap": "只有 Spring AI 2.0.0 / AgentScope Java 2.0.1 版本号与「按实际 API 核对」提醒，无拆包、Runnable/LCEL、LangGraph 运行时、v1 聚焦 Agent、langchain-classic 等演进主线。"
+  },
+  {
+    "id": "LC-12",
+    "question": "12. Deep Research 的实现逻辑和适用场景是什么？",
+    "status": "missing",
+    "location": "—",
+    "gap": "仅 Supervisor 编排模式、研究型 Agent 评测指标等零星概念，缺 Research Brief、Supervisor 拆题、并行取证、缺口补搜、统一写作与预算/注入治理。"
+  }
+]

@@ -53,6 +53,13 @@ PART_INFO = [
         'src': None,
         'short': '第六部分',
     },
+    {
+        'file': 'part7-xiaolin.md',
+        'title': '第七部分 · 小林面试笔记 AI 面试题逐题核对与补充',
+        'lead': '外部题库交叉验证：对 [小林面试笔记 · 大模型面试题](https://xiaolinnote.com/ai/) 的 6 个专题、124 道题逐题核对覆盖情况，判定 40 道已覆盖、48 道部分覆盖、36 道未覆盖，并为后两类共 **84 道题**补写详细答案。补齐了原指南相对薄弱的模型底层原理与训练、LangChain 系列框架、AI 编程工程实践，以及 A2A / WebRTC / 代码沙箱 / Skill 加载等协议与运行时细节。完整判定表见附录 D。',
+        'src': None,
+        'short': '第七部分',
+    },
 ]
 
 
@@ -242,6 +249,8 @@ def build_appendix_c():
 | 第三部分 Agent 项目实战 |  |  |  |  |  |  |
 | 第四部分 RAG |  |  |  |  |  |  |
 | 第五部分 AI 系统设计 |  |  |  |  |  |  |
+| 第六部分 内嵌速答 |  |  |  |  |  |  |
+| 第七部分 外部题库补充 |  |  |  |  |  |  |
 
 ## 面试中最常见的十类失分点
 
@@ -266,6 +275,45 @@ def build_appendix_c():
 '''
 
 
+def build_appendix_d():
+    sections = [
+        ('agent', 'Agent 面试专题'),
+        ('rag', 'RAG 面试专题'),
+        ('tools', 'LLM 工具调用面试专题'),
+        ('llm', '大模型工程面试专题'),
+        ('langchain', 'LangChain 框架面试专题'),
+        ('coding', 'AI 编程面试专题'),
+    ]
+    labels = {'covered': '已覆盖', 'partial': '部分覆盖', 'missing': '未覆盖'}
+    data = {sec: json.load(open(os.path.join(NOTES, f'xiaolin_coverage_{sec}.json'), encoding='utf-8'))
+            for sec, _ in sections}
+    out = ['# 附录 D · 小林面试笔记 124 题覆盖对照表', '',
+           '> 题库来源：[xiaolinnote.com/ai/](https://xiaolinnote.com/ai/)（抓取于 2026-11-11）。'
+           '「部分覆盖 / 未覆盖」共 84 题已在第七部分补写完整答案；'
+           '「已覆盖」题可按表中位置回查原指南。判定口径见 7.0 节。', '',
+           '| 专题 | 题数 | 已覆盖 | 部分覆盖 | 未覆盖 |', '| --- | ---: | ---: | ---: | ---: |']
+    for sec, name in sections:
+        cov = data[sec]
+        st = {k: sum(1 for x in cov if x['status'] == k) for k in labels}
+        out.append(f'| {name} | {len(cov)} | {st["covered"]} | {st["partial"]} | {st["missing"]} |')
+    total = sum(len(v) for v in data.values())
+    out += [f'| **合计** | **{total}** | '
+            f'**{sum(1 for v in data.values() for x in v if x["status"] == "covered")}** | '
+            f'**{sum(1 for v in data.values() for x in v if x["status"] == "partial")}** | '
+            f'**{sum(1 for v in data.values() for x in v if x["status"] == "missing")}** |', '']
+    for sec, name in sections:
+        out += [f'## {name}（{len(data[sec])} 题）', '',
+                '| ID | 题干 | 判定 | 对应指南位置 | 缺口 / 判定依据 |',
+                '| --- | --- | --- | --- | --- |']
+        for x in data[sec]:
+            q = x['question'].replace('|', '\\|').replace('\n', ' ')
+            loc = str(x.get('location') or '—').replace('|', '\\|').replace('\n', ' ')
+            gap = str(x.get('gap') or '—').replace('|', '\\|').replace('\n', ' ')
+            out.append(f"| `{x['id']}` | {q} | {labels.get(x['status'], x['status'])} | {loc} | {gap} |")
+        out.append('')
+    return '\n'.join(out)
+
+
 def main():
     chunks = [open(os.path.join(NOTES, 'part0-overview.md'), encoding='utf-8').read().strip()]
     for p in PART_INFO:
@@ -275,9 +323,11 @@ def main():
     chunks.append('\n\n---\n\n' + app_a)
     chunks.append('\n\n---\n\n' + build_appendix_b())
     chunks.append('\n\n---\n\n' + build_appendix_c())
-    chunks.append('\n\n---\n\n> 本指南由 JavaGuide `docs/ai`（`main` 分支，2026-11-09 抓取）全部 40 篇 Markdown 整理而成；'
-                 '正式面试题 213 道逐题作答，合计 839 条问句式考点均有答案或速答。'
-                 '文档内容随上游仓库更新，涉及模型能力、版本与参数请以官方文档为准。\n')
+    chunks.append('\n\n---\n\n' + build_appendix_d())
+    chunks.append('\n\n---\n\n> 本指南由 JavaGuide `docs/ai`（`main` 分支，2026-11-09 抓取）全部 40 篇 Markdown 整理而成：'
+                 '正式面试题 213 道逐题作答，合计 839 条问句式考点均有答案或速答；'
+                 '另对小林面试笔记 124 道 AI 面试题逐题核对，补写 84 道答案（第七部分与附录 D）。'
+                 '文档内容随上游仓库与题库更新，涉及模型能力、版本与参数请以官方文档为准。\n')
     text = '\n'.join(chunks)
     text = re.sub(r'\n{4,}', '\n\n\n', text)
     open(OUT, 'w', encoding='utf-8').write(text)

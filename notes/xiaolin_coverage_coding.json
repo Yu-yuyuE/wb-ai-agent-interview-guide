@@ -1,0 +1,100 @@
+[
+  {
+    "id": "CD-01",
+    "question": "1. AI 编程有哪些常见方式？代码补全、对话生成和 Agent 编程有什么区别？",
+    "status": "missing",
+    "location": "—",
+    "gap": "指南 Q1/Q4 只讲通用 Agent 自主性，无「代码补全/对话生成/Agent 编程」三分法与「谁根据执行结果推进下一步」的编程分工。"
+  },
+  {
+    "id": "CD-02",
+    "question": "2. 如何向 AI 描述开发需求、约束条件和验收标准？",
+    "status": "missing",
+    "location": "—",
+    "gap": "Q18 四要素与 8.10 目标写法只是通用 Prompt/Loop 表述，缺规格三段式、由规则推导验收条件与验收样例。"
+  },
+  {
+    "id": "CD-03",
+    "question": "3. 使用 AI 编程时，应该提供哪些代码上下文？",
+    "status": "partial",
+    "location": "第二部分 Q22/Q23（Context Engineering）、Q24；第四部分 Q30–Q37",
+    "gap": "有「什么信息进入上下文」的通用框架，但缺入口/调用方/类型定义/测试/配置/报错/工作区版本等代码材料清单。"
+  },
+  {
+    "id": "CD-04",
+    "question": "4. Coding Agent 如何在大型代码仓库中定位相关代码？",
+    "status": "missing",
+    "location": "—",
+    "gap": "RAG 是文档 Chunk 检索、Q32 是 Skill 路由，均无符号级定位、调用/数据/事件关系追踪与同名符号消歧。"
+  },
+  {
+    "id": "CD-05",
+    "question": "5. Vibe Coding 和 Spec 驱动开发有什么区别？分别适合什么场景？",
+    "status": "missing",
+    "location": "—",
+    "gap": "指南无 Vibe Coding、Spec 驱动、spec.md/plan.md/tasks.md 范式与探索→交付的场景切换。"
+  },
+  {
+    "id": "CD-06",
+    "question": "6. 复杂开发需求如何拆分，才能让 AI 更可靠地完成？",
+    "status": "partial",
+    "location": "第二部分 Q53、Q19、Q54、Q39；第五部分题 50",
+    "gap": "有长任务拆分与任务状态管理的通用机制，但缺按可验证行为目标拆、tasks.md 依赖与前置结果、集成回归做法。"
+  },
+  {
+    "id": "CD-07",
+    "question": "7. 如何保证 AI 生成代码的质量？",
+    "status": "missing",
+    "location": "—",
+    "gap": "指南评测体系针对模型输出质量，缺构建/类型/静态检查、单测/集成/回归、Diff 审查与独立测试 Oracle 的代码质量门禁。"
+  },
+  {
+    "id": "CD-08",
+    "question": "8. 如何审查 AI 生成的代码，发现看起来合理但实际错误的实现？",
+    "status": "missing",
+    "location": "—",
+    "gap": "题 30/Q-A29 是工具参数校验，缺以 Diff 为对象、构造反例、检查断言被删弱与权限范围变化的代码审查方法论。"
+  },
+  {
+    "id": "CD-09",
+    "question": "9. 如何利用报错、日志和测试结果，让 AI 排查并修复问题？",
+    "status": "missing",
+    "location": "—",
+    "gap": "Badcase 复盘与 Trace 回放面向 Agent 轨迹，缺复现条件、调用栈、关联日志、区分性检查与旧实现能失败的回归用例的调试闭环。"
+  },
+  {
+    "id": "CD-10",
+    "question": "10. 如何保证 AI 生成的测试用例覆盖关键业务场景？",
+    "status": "missing",
+    "location": "—",
+    "gap": "题 33 Golden Set 是评测样本设计，缺业务规则→场景→可控前置→独立 Oracle→断言→变异测试的代码测试设计。"
+  },
+  {
+    "id": "CD-11",
+    "question": "11. AI 编程的上下文越来越长时，如何保留关键信息？",
+    "status": "partial",
+    "location": "第二部分 Q24（Compaction/结构化笔记/Sub-agent）、Q14；第一部分 1-3、5-1",
+    "gap": "有上下文压缩与记忆压缩通用机制，但缺区分代码已改/行为已验证、测试绑定代码状态、失效方案标注与 context.md 实际读入。"
+  },
+  {
+    "id": "CD-12",
+    "question": "12. Coding Agent 如何避免被过期的代码描述误导？",
+    "status": "partial",
+    "location": "第二部分 Q14、Q15、Q38；第四部分 Q47/Q48/Q51",
+    "gap": "有记忆过期/冲突与知识库版本治理，但缺源码输入指纹、依赖反向查找、先停旧描述再重建、纠正上下文旧结论。"
+  },
+  {
+    "id": "CD-13",
+    "question": "13. 跨会话继续开发时，如何让 AI 接续需求、代码状态和任务进度？",
+    "status": "partial",
+    "location": "第二部分 Q9–Q16、Q51、Q55、Q24；第三部分 Q-A39；第五部分题 8、题 52",
+    "gap": "有 Memory、中断恢复与 HITL 暂停字段，但缺 HANDOFF.md 交接、未跟踪文件清点、运行状态先查询不重放与旧验证复核。"
+  },
+  {
+    "id": "CD-14",
+    "question": "14. AI 修改文件、执行命令和读取外部内容时，应该如何控制权限与风险？",
+    "status": "partial",
+    "location": "第五部分题 22–30、题 55；第二部分 Q56、Q46；第六部分 MCP 生产检查清单 8–24 条",
+    "gap": "有工具权限、二次确认与审计通用机制，但缺编码场景的授权/能力/隔离三层、文件与网络凭据限制、命令脚本副作用与外部内容不可信判定。"
+  }
+]

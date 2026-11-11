@@ -1,0 +1,31 @@
+# 小林面试笔记 · 大模型工程专题 23 题覆盖分析
+
+统计：**covered 4 题 / partial 6 题 / missing 13 题**（共 23 题）。
+
+判定口径：`covered` = 指南里有专门一节回答该题主要考点；`partial` = 有相关概念或相邻答案，但缺关键角度、实现细节；`missing` = 指南基本没有对应内容。指南第一部分取自 JavaGuide 大模型基础，只讲 Token、上下文窗口、采样参数、API 调用、结构化输出与 AI 应用评测，不讲模型内部结构与训练，因此本专题以 missing 为主。需补写答案的是 partial + missing 共 19 题。
+
+| 题号 | 题干 | 判定 | 对应指南章节 | 判定依据/缺口说明 |
+| --- | --- | --- | --- | --- |
+| LM-01 | 1. 什么是大语言模型？和传统 NLP 模型有什么区别？ | missing | — | 指南仅在 1-1、6.1 用「自回归」解释 Token 生成，没有专门一节讲 LLM 定义；缺传统 NLP 流水线（分词/词性/NER/意图）、OOV 与误差累积、BERT「预训练+微调」的过渡定位、判别式 vs 生成式、CLM 统一接口与涌现能力。 |
+| LM-02 | 2. 讲讲 Transformer 架构基本原理？Encoder 和 Decoder 是什么？ | missing | — | 题目示例明确为 missing。指南 1-3、6.2 只把「Self-Attention / 位置编码」当作 Lost in the Middle 的成因一笔带过；缺 RNN 两大缺陷、Q/K/V 线性投影、缩放点积与 √d_k、多头、FFN、三种架构变体及 Decoder-only 胜出的演进逻辑。 |
+| LM-03 | 3. 多头注意力（MHA）有哪些局限？MQA、GQA、Flash Attention 怎么解决？ | missing | — | 仅第一部分 6.2 速查（L871）把 FlashAttention、GQA/MQA、Sliding Window 作为长上下文优化名词罗列，无任何展开；缺训练/推理两阶段痛点区分、KV Cache 显存公式、memory-bound、MQA 1/H、GQA 分组光谱、Flash Attention 分块+在线 softmax、以及「结构层与实现层叠加」的结论。 |
+| LM-04 | 4. 大模型的位置编码是干什么用的？sin/cos、RoPE、ALiBi 有什么区别？ | missing | — | 仅 1-3（L240）把「位置编码」列为 Lost in the Middle 的相关因素一词；缺 Attention 位置盲、为什么不能用整数序号、sin/cos 加到 embedding、RoPE 旋转 Q/K 把相对距离编进点积、ALiBi 距离惩罚、三者外推能力对比与 NTK/YaRN。 |
+| LM-05 | 5. 什么是大模型项目的分词器？原理是什么？ | partial | 第一部分 1-1、6.1 | 有 Token 定义、中英文/代码 Token 消耗差异、BPE 与 Unigram 名词、词表规模（o200k_base 约 20 万、Qwen2.5 约 15 万）、按 `usage` 计费与官方 Tokenizer 计数，属相邻答案；缺字符级/词级/子词级三粒度取舍、BPE 三步合并训练流程、OOV 处理、BOS/EOS/PAD/SEP 与 ChatML 特殊 Token、边界截断与 1000 汉字≈1000-1500 Token 的工程估算。 |
+| LM-06 | 6. 大模型是怎么训练出来的？ | missing | — | 指南明确不讲训练。仅第四部分 Q3 讲「RAG vs 微调」职责边界，附录【预测题 1/2】只是 TODO 待办标题（§0.3 G08 标「待写」）；缺预训练→SFT→对齐三阶段、Common Crawl/代码/图书数据源与清洗、CLM 目标、算力开销、SFT 数据格式与质量优先、RLHF/DPO 对齐、以及「为什么缺一不可」。 |
+| LM-07 | 7. 什么是 Scaling Law？大模型的「涌现能力」是怎么回事？ | missing | — | 全指南检索不到 Scaling Law、幂律、Chinchilla、涌现、Mirage 等术语；缺 loss∝N^-α、参数:数据=1:20 的 compute-optimal 配比、GPT-3 欠训、Llama 3 1:1875 与推理成本最优、50B-100B 临界规模、数据墙/算力墙及 Mirage 测量假象争议。 |
+| LM-08 | 8. 大模型微调的方案有哪些？ | missing | — | 仅第四部分 Q3 讲「微调解决风格格式、RAG 解决外部知识」，附录预测题 1/2 为待办；缺「改哪些参数（全量/LoRA/QLoRA）× 学什么目标（SFT/DPO）」两个正交维度、全量微调 80GB+ 显存账、灾难性遗忘、微调是最后手段的前置判断、按资源选组合的实战结论。 |
+| LM-09 | 9. 请讲一下 LoRA 技术，除了减少参数量，它还有哪些优点？ | missing | — | 题目示例明确为 missing。仅第二部分 Q14（L1444）把 LoRA 当作「参数记忆难删」的例子；缺 ΔW 低秩假设、B·A 与缩放 α、r=8/16 参数量计算、合并回 W 后推理零开销、一基底多 LoRA 热切换、冻结权重降低遗忘、训练稳定、LoRA Merging 五大优点及与 Adapter 对比。 |
+| LM-10 | 10. SFT 之后还有哪些 Post-Training？RLHF、DPO、GRPO、拒绝采样什么关系？ | missing | — | 无任何 Post-Training 内容；缺上位概念、RLHF 四模型与 PPO、DPO 闭式偏好损失、GRPO 砍掉 Value Model 用组内归一化估计优势、拒绝采样「采样-筛选-再 SFT」、RLAIF，以及 Llama 2-Chat / DeepSeek R1 组合式 pipeline。 |
+| LM-11 | 11. 大模型的 DPO 和 PPO 的区别是什么？ | missing | — | 指南不区分在线 RL 与等价监督学习；缺 PPO 的 policy/reference/reward/value 四模型各自职责、KL 约束防 reward hacking、DPO 用概率比替代奖励模型、2 模型架构、两者表达能力与工程门槛对比。 |
+| LM-12 | 12. 大模型生成文本时的解码策略有哪些？贪心、Beam Search、采样分别什么时候用？ | partial | 第一部分 1-4、6.3 | 1-4 与 6.3 完整讲了 Temperature/Top-P/Top-K 的原理与分场景配置、T=0 仍不确定、推理模型参数限制，是强相邻答案；但缺「确定性 vs 随机性」的策略分类、贪心复读机、Beam Search 保留 Top-B 路径与翻译时代适用性、Beam Search Curse 及与 KV Cache 不兼容、采样族整体定位、推测解码与 Self-Consistency。 |
+| LM-13 | 13. 大模型的参数：温度值、Top-P、Top-K 分别是什么？各个场景下的最佳设置是什么？ | covered | 第一部分 1-4、6.3 | 题目示例明确为 covered。1-4 是专门一节，逐一讲三个参数作用维度、Top-P 自适应优于固定 Top-K、分场景参数表（代码 0~0.2 / 对话 0.5~0.7 / 创意 0.8~1.2）、「一次只调一个参数」；6.3 有速查条目，附录 6.3 还覆盖 T=0 仍不确定与 seed。 |
+| LM-14 | 14. KV Cache 是什么？Prompt Caching 的原理是什么？ | partial | 第一部分 6.3、第五部分 题 20 | Prompt Caching 已有专门内容：6.3 讲三家厂商缓存门槛/寿命/计费与「不变内容放前」，题 20 有 6 行缓存类型表、`cache_control`、`cached_tokens`、幂等复用键与命中率评估；但题干前半的 KV Cache 原理完全缺失：自回归朴素实现 O(N³)→O(N²)、K/V 可缓存的数学依据、显存公式 2·B·N·L·H·d_k·2B、与 GQA/MQA/MLA/PagedAttention/KV Cache 量化的关系。 |
+| LM-15 | 15. 大模型量化是什么？INT8/INT4/AWQ/GPTQ 怎么选？ | missing | — | 指南中「量化」命中全部是第四部分向量索引（IVF-PQ、乘积量化）语境，与权重量化无关；缺 scale+zero_point 映射、对称/非对称、INT8/INT4/INT3 精度边界、GPTQ 误差补偿、AWQ 激活感知保护 1% 显著权重、NF4/双重量化/分页优化器、GGUF 是文件格式而非算法、按框架 kernel 选型与 outlier/KV Cache 量化陷阱。 |
+| LM-16 | 16. 如何写好 Prompt？分享下 Prompt 工程实践经验？ | covered | 第二部分 Q17–Q19、§8.4、第六部分 31–33、第五部分 题 6 | 有多节专门回答：Q18 四要素 Role/Task/Context/Format 与好差 Prompt 对比、Lost in the Middle 下的位置布局、最小评测五步（10–30 条样例、单点修改、回归集）；Q19 六大技巧与失败处理；Q17 PE vs CE；§8.4 延伸追问；题 6 Prompt 版本管理；第六部分引导式 CoT 三问与分区输出。 |
+| LM-17 | 17. 什么是 CoT？为啥效果好？它有什么缺点或局限性？ | partial | 第二部分 Q19、第六部分 31–33、第一部分 6.3 | Q19 有 CoT 专门段落（适用场景、Zero-shot 与引导式、分场景表、增加 Token/延迟、reasoning model 不吐完整链），第六部分有引导式 CoT 三问；但角度是「适合什么场景」，缺题干要的「为什么有效」机制（草稿纸/工作记忆/激活预训练推理模式）、四类局限（Token 与延迟成本、简单任务反效果、推理链错误累积传导、纯记忆任务无效）、Few-shot vs Zero-shot 完整对比、Self-Consistency 与生产不展示完整 CoT 的取舍。 |
+| LM-18 | 18. 大模型为什么会出现幻觉？怎么缓解？ | covered | 第一部分 1-6、6.4 | 题目示例明确为 covered。1-6 是专门一节，讲自回归按概率补文本、任务边界不清、RAG 证据约束但不彻底消除、契约/校验/拒答/评测/人工反馈兜底；6.4 速查条目齐全。 |
+| LM-19 | 19. MoE 混合专家模型是什么？DeepSeek V3、Qwen 为什么用 MoE？ | missing | — | 全指南无 MoE、混合专家、稀疏激活、Router、专家不平衡等术语；缺 FFN 复制成 N 专家 + Top-K 路由、总参数 vs 激活参数解耦（671B/37B、5.5% 激活率）、共享专家、负载均衡损失与 Auxiliary-Loss-Free、专家不平衡/Router 不稳/All-to-All 通信、显存按总参数走而速度按激活参数走、以及 2024 年后才爆发的三个原因。 |
+| LM-20 | 20. 大模型部署有哪些主流方案？vLLM、TGI、llama.cpp、SGLang 实际项目里怎么选？ | missing | — | 仅第二部分 Q14（L1444）把 vLLM/TGI 作为「支持动态挂载卸载 adapter 的运行时」名词提及，第五部分 题 47 讲的是语音 ASR/TTS 组件的云端/本地选型而非 LLM 推理框架；缺 PagedAttention 分页 KV Cache、Continuous Batching、RadixAttention 前缀树、TGI 的 HF 生态定位、llama.cpp+GGUF 的 CPU/边缘定位、TensorRT-LLM、决策矩阵与三类部署陷阱。 |
+| LM-21 | 21. 大模型能力评测指标有哪些？ | partial | 第一部分 四（4-1~4-8）、第四部分 Q9/Q54、第六部分 70–74 | 指南有完整的「AI 应用评测」体系：4-1 专门讲「为什么不能只靠公开 benchmark」、Golden Set 冷启动、LLM-as-Judge 偏差与校准、离线/Trace 回放/线上灰度、Judge 打分维度（事实准确性/完整性/措辞/格式合法率/Schema 通过率）、第四部分 Q54 的 MRR/NDCG/Recall@K 等口径，属强相邻答案；但缺「模型能力侧」指标：MMLU/MMLU-Pro、HumanEval/MBPP/SWE-bench 与 pass@k、GSM8K/MATH/GPQA、MT-Bench/Arena/τ-bench、HELM/LiveBench、数据污染及「学术榜单+业务黄金集+线上指标」三层闭环。 |
+| LM-22 | 22. 对比使用过哪些主流大模型？你们项目中最终选用了哪个模型？为什么？ | partial | 第三部分 §11（Q-A26）、第五部分 题 11/14/15、附录【预测题 8】 | §11 有专门一节「模型选择至少同时看哪 7 项 + 强模型建基线逐节点替换 + 每次跑同一套评测集」，Q-F04 有选型追问链，第五部分题 14 讲模型路由；但指南自己标注「源文档只给维度清单与基线法，尚未给出选型表」；缺主流模型横向对比（DeepSeek/Qwen/豆包 vs GPT/Claude 各自特长）、数据出境合规、成本与延迟约束、Model Routing 按节点分配与项目化选型结论。 |
+| LM-23 | 23. 为什么长上下文会出现 Lost in the Middle？上下文窗口越大越好吗？ | covered | 第一部分 1-2、1-3、6.2，第四部分 Q7/Q8 | 1-2 专门回答「上下文窗口越大，效果一定越好吗」，1-3 专门回答「Lost in the Middle 怎么缓解」，6.2 有速查（含自注意力 O(N²)、FlashAttention/GQA 等优化名词），第四部分 Q7/Q8 从 RAG 角度再答一次；四节合起来覆盖题干两个子问题。 |

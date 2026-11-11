@@ -1,0 +1,156 @@
+[
+  {
+    "id": "TL-01",
+    "question": "1. 什么是 Function Calling？原理是什么？",
+    "status": "covered",
+    "location": "第一部分 3-4 Function Calling 的完整链路是什么？",
+    "gap": "7 步链路、语义鸿沟、并行调用 ID 回填、执行权在业务侧与易错点齐全，专门一节完整覆盖。"
+  },
+  {
+    "id": "TL-02",
+    "question": "2. LLM 是如何学会调用外部工具的？",
+    "status": "missing",
+    "location": "—",
+    "gap": "仅预测题 2 与 TODO 清单零散提及 SFT/LoRA/DPO/RFT，缺工具调用示范数据、RLHF 建立该不该调的边界感、奖励模型与 RLAIF。"
+  },
+  {
+    "id": "TL-03",
+    "question": "3. 大模型的 Function Call 能力是怎么训练出来的？",
+    "status": "missing",
+    "location": "—",
+    "gap": "缺五类训练场景覆盖、反向传播、奖励模型四步加 PPO 与 KL 散度、Self-Instruct 与蒸馏区分、RLAIF 偏见传递。"
+  },
+  {
+    "id": "TL-04",
+    "question": "4. 什么是 MCP（模型上下文协议）？讲讲它的核心内容？",
+    "status": "covered",
+    "location": "第二部分 Q25–Q29（MCP 与 Agent Skills）",
+    "gap": "M×N→M+N、Host/Client/Server、三类原语、一次调用时序、JSON-RPC、stdio/Streamable HTTP、版本演进与不可信内容均有专门节。"
+  },
+  {
+    "id": "TL-05",
+    "question": "5. MCP 由哪几部分组成？",
+    "status": "covered",
+    "location": "第二部分 Q26、Q27、Q25、Q29",
+    "gap": "角色层、能力层、协议层分别有专门节，含传输方式选择与 2026-07-28 版本演进，并点明消息格式与传输解耦。"
+  },
+  {
+    "id": "TL-06",
+    "question": "6. MCP 和 Function Calling 有什么区别？有没有实际跑过 MCP？",
+    "status": "partial",
+    "location": "第一部分 3-5；第二部分 Q28",
+    "gap": "层次区别有 3-5 与 Q28 两节，但题干第二个子问题实际跑过 MCP 的配置与 SDK 实操（claude_desktop_config.json、list_tools/call_tool、stdio 起服务）未展开。"
+  },
+  {
+    "id": "TL-07",
+    "question": "7. Function Calling 也属于工具调用，请问什么场景下使用 Function Calling，什么场景下使用 MCP？",
+    "status": "partial",
+    "location": "第一部分 3-10 选型表、3-5；第三部分 §10 Q-A25",
+    "gap": "有复用需求与工具数量选型，缺社区现成 MCP Server、Serverless 部署限制、精细控制执行逻辑、原型 Demo 与团队变更频率等多维框架。"
+  },
+  {
+    "id": "TL-08",
+    "question": "8. 为什么有些特定的推理模型不支持 MCP 协议？",
+    "status": "missing",
+    "location": "—",
+    "gap": "仅有 reasoning_content、推理 Token 计费、参数适配等 API 细节，缺 thinking 连续生成与工具调用中途暂停的范式冲突、KV Cache 显存、o1/o3/Extended Thinking 折中与 FC→MCP 传导关系。"
+  },
+  {
+    "id": "TL-09",
+    "question": "9. Skill 是什么？",
+    "status": "covered",
+    "location": "第二部分 Q30、Q31、Q32、Q33；第六部分速答 34/35",
+    "gap": "能力包结构、SKILL.md frontmatter、自动发现、渐进式披露三层、与 Prompt/Tool/Slash 边界均有专门节与速答。"
+  },
+  {
+    "id": "TL-10",
+    "question": "10. MCP 和 Agent Skill 的区别是什么？",
+    "status": "covered",
+    "location": "第二部分 Q30、Q31；第一部分 3-7",
+    "gap": "Q30 专节讲 Skill 与 MCP/FC/Prompt 边界并给出五步执行链的配合方式，Q31 讲 Skill 是工作流、MCP 是原子操作的粒度差异。"
+  },
+  {
+    "id": "TL-11",
+    "question": "11. Function Calling、Skill、MCP 这三个有什么区别？",
+    "status": "partial",
+    "location": "第一部分 3-5/3-6/3-7、6.9 速查；第二部分 Q30",
+    "gap": "三者边界有分散答案，但指南明确主张没有固定层级，缺题干要考的三层层级依赖与完整场景串联这一关键角度。"
+  },
+  {
+    "id": "TL-12",
+    "question": "12. 什么是 A2A 协议？它和 MCP 协议的区别是什么？",
+    "status": "missing",
+    "location": "—",
+    "gap": "仅在 multi-agent 延伸追问与术语速查表出现 A2A/TaskState 零散条目，无专门章节，缺一纵一横对比、Agent Card、单 Agent 天花板与 Task 状态机。"
+  },
+  {
+    "id": "TL-13",
+    "question": "13. MCP 协议通常采用什么通信方式？",
+    "status": "partial",
+    "location": "第二部分 Q29、8.6 mcp.md 延伸追问、第九部分速查表",
+    "gap": "有 stdio/Streamable HTTP/JSON-RPC 2.0/HTTP+SSE deprecated 的零散答案，但无专门一节，缺 JSON-RPC 三类消息、stdio 管道原理、单端点 POST+SSE 机制与双端点弃用原因。"
+  },
+  {
+    "id": "TL-14",
+    "question": "14. 说说 WebSocket 和 SSE 通信的区别及局限性？",
+    "status": "partial",
+    "location": "第一部分 2-3、6.5 速查、7.3 补充 Last-Event-ID",
+    "gap": "有专门节讲方向区别与选型，但缺局限性追问重点：HTTP/1.1 六连接上限、仅文本 Base64 膨胀、WS 有状态扩展需 Redis、代理拦截 Upgrade、请求-响应配对与 101 握手。"
+  },
+  {
+    "id": "TL-15",
+    "question": "15. 为什么要用 WebRTC 协议？它和 WebSocket 在 AI 对话流中的核心差异是什么？",
+    "status": "partial",
+    "location": "第五部分题 46 追问 WebRTC 与 WebSocket 的边界；附 6 语音速答",
+    "gap": "题 46 已讲 UDP/TCP、丢包隐藏与 ICE/DTLS-SRTP/RTP，但缺语音容忍丢包不容忍延迟的完整论证、SDP 信令、STUN/TURN、自适应码率与延迟阈值。"
+  },
+  {
+    "id": "TL-16",
+    "question": "16. 有没有用过大模型的网关框架？网关层解决了什么问题？",
+    "status": "covered",
+    "location": "第五部分题 10/11/12/20/21；第一部分 2-7；第三部分 §12；附 3 选型",
+    "gap": "直连七类痛点、12 项能力清单、语义缓存专节、LiteLLM/Kong/Cloudflare 选型、成本归因与虚拟 Key，机制工程追问齐全。"
+  },
+  {
+    "id": "TL-17",
+    "question": "17. 工具很多时，Agent 如何做 Tool Routing，减少 Token 并避免选错工具？",
+    "status": "partial",
+    "location": "第三部分 Q-A45；第二部分 Q32；第五部分题 22；第六部分速答 66",
+    "gap": "有相似工具误选 Badcase 与工具裁剪，但缺工具注册表、先鉴权后召回、粗分类、混合检索 Top-K、动态绑定、Recall@K 评测与低置信度兜底的完整分层链路。"
+  },
+  {
+    "id": "TL-18",
+    "question": "18. 工具调用格式非法、参数错误、超时或失败时，Agent 如何容错？",
+    "status": "covered",
+    "location": "第一部分 3-8/3-9；第二部分 Q50；第三部分 §14/§16/§17/§19/§23；第五部分题 16/25/30",
+    "gap": "结构化失败四级兜底、八道检查、幂等键、重试预算、熔断降级、UNKNOWN 对账、Checkpoint/HITL 与审计多节完整覆盖。"
+  },
+  {
+    "id": "TL-19",
+    "question": "19. 为什么要把 Agent 的工具执行流程封装成 CLI？",
+    "status": "missing",
+    "location": "—",
+    "gap": "无工具能力与调用入口的区分、独立运行多入口复用、stdout/stderr 契约、退出码与业务状态之分、异步受理与完成、CI 复用及不自动提供权限隔离等内容。"
+  },
+  {
+    "id": "TL-20",
+    "question": "20. Agent 接入工具时应该如何选择 CLI 或 MCP？",
+    "status": "missing",
+    "location": "—",
+    "gap": "无执行入口与接入协议分层、直接适配 CLI 的宿主映射、MCP 包装已有 CLI、本地/远程属部署选择以及依赖版本权限成本对比。"
+  },
+  {
+    "id": "TL-21",
+    "question": "21. Agent 的代码执行沙箱应该如何设计？",
+    "status": "partial",
+    "location": "第五部分题 22/23；第六部分速答 107；第二部分 Q29",
+    "gap": "有最小权限、信任区、资源限制清单与 Docker/cgroups 提及，但缺只读输入/可写输出、资源预算作用于进程组、共享宿主内核风险、运行器生命周期与产物检查等完整设计。"
+  },
+  {
+    "id": "TL-22",
+    "question": "22. Agent 的 Skill 加载机制是如何实现的？",
+    "status": "partial",
+    "location": "第二部分 Q30/Q31/Q32；第六部分速答 34",
+    "gap": "有渐进式披露三层与路由三阶段，但缺宿主发现并解析 frontmatter 建目录、加载≠执行、四种状态区分、资源路径解析、Compaction 后重读与版本核对等实现细节。"
+  }
+]

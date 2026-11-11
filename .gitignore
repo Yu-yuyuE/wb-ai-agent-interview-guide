@@ -4,3 +4,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 .gh_*.json
+.tmp_*
+xiaolin_ai_index.html
+sources/xiaolin_pages/
+sources/xiaolin_corpus_*.txt

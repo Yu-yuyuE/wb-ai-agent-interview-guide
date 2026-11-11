@@ -1,0 +1,212 @@
+[
+  {
+    "id": "AG-01",
+    "question": "1. 什么是 Agent？与大模型有什么本质不同？",
+    "status": "covered",
+    "location": "第二部分 Q1（Q2/Q3 补充）",
+    "gap": "证据：Q1 以「感知-决策-执行闭环 vs 只生成回复」立论，含定义、三层最小系统与五类易错追问。"
+  },
+  {
+    "id": "AG-02",
+    "question": "2. Agent 的基本架构由哪些核心组件构成？",
+    "status": "covered",
+    "location": "第二部分 Q2（Q3、Q6 补充）",
+    "gap": "证据：Q2 逐块拆 Agent = LLM + Planning + Memory + Tools，含 Observation 回填与组件映射，Q6 补工具 description。"
+  },
+  {
+    "id": "AG-03",
+    "question": "3. Workflow，Agent，Tools 这三个的概念和区别介绍一下？",
+    "status": "covered",
+    "location": "第二部分 Q4 / Q7 / Q42",
+    "gap": "证据：Q4 核心即「谁决定执行路径」，Q7 讲纯 Agent 与 Agentic Workflow 取舍，Q42 讲 Workflow/Graph/Loop 关系。"
+  },
+  {
+    "id": "AG-04",
+    "question": "4. 了解哪些其他的 Agent 设计范式？Agent 和 Workflow 的区别是什么？",
+    "status": "covered",
+    "location": "第二部分 Q5（Q4、Q7 补充）",
+    "gap": "证据：Q5 专讲四种范式与选型表，Q4/Q7 给出「能写出来就用 Workflow」的取舍与 Reflection 定位。"
+  },
+  {
+    "id": "AG-05",
+    "question": "5. Agent 推理模式有哪些？ReAct 是啥？具体是怎么实现的？",
+    "status": "partial",
+    "location": "第二部分 Q5 / Q3 / Q19",
+    "gap": "缺口：缺 Thought-Action-Observation 格式约束、prompt 模板、代码驱动循环与解析实现、Function Calling 版 ReAct 及循环漂移/错误传播。"
+  },
+  {
+    "id": "AG-06",
+    "question": "6. ReAct、Plan-and-Execute、Reflection 三种范式有什么核心区别？实际项目中该如何选型？",
+    "status": "covered",
+    "location": "第二部分 Q5",
+    "gap": "证据：Q5 逐范式讲机制、选型表、Reflexion/Self-Refine/CRITIC 与「Reflection 是叠加校验」的易错点。"
+  },
+  {
+    "id": "AG-07",
+    "question": "7. 复杂任务怎么做的任务拆分？为什么要拆分？效果如何提升？",
+    "status": "partial",
+    "location": "第二部分 Q53 / Q19 / Q5",
+    "gap": "缺口：缺 context window 瓶颈的成因论证、并行降延迟量化效果、自适应递归拆分与拆分结果三验证标准。"
+  },
+  {
+    "id": "AG-08",
+    "question": "8. 请你介绍一下 AI Agent 的记忆机制，并说明在实际开发中应该如何设计记忆模块？",
+    "status": "covered",
+    "location": "第二部分 Q9–Q16 整节",
+    "gap": "证据：Q10 回答存什么/存哪/何时读/过期冲突，Q9/Q11/Q14/Q16 覆盖分层、向量与 Markdown、记忆代谢与读用写闭环。"
+  },
+  {
+    "id": "AG-09",
+    "question": "9. Agent 的长短期记忆系统怎么做的？记忆是怎么存的？粒度是多少？怎么用的？",
+    "status": "partial",
+    "location": "第二部分 Q9 / Q11 / Q14",
+    "gap": "缺口：缺本题连环追问的核心——记忆条目粒度（一次完整交互/独立知识点）、结构化工作记忆、metadata 过滤与读写流程落地。"
+  },
+  {
+    "id": "AG-10",
+    "question": "10. 什么是 Multi-Agent？",
+    "status": "covered",
+    "location": "第二部分 Q8 / Q57、第三部分 §8（Q-A22）",
+    "gap": "证据：Q57 讲收益前提与通信/状态一致性，Q8 讲协作代价与决策顺序，Q-A22 讲拆分条件与拓扑。"
+  },
+  {
+    "id": "AG-11",
+    "question": "11. 说说 Single-Agent 和 Multi-Agent 的设计方案？",
+    "status": "partial",
+    "location": "第三部分 §8（Q-A21/Q-A22）、第二部分 Q8 / Q57",
+    "gap": "缺口：缺 Orchestrator 三种变体（静态路由/动态规划/自适应编排）、去中心化在生产失效的工程分析与渐进式演进策略。"
+  },
+  {
+    "id": "AG-12",
+    "question": "12. Agent 记忆压缩通常有哪些方法？",
+    "status": "partial",
+    "location": "第二部分 Q14 / Q24 / Q9",
+    "gap": "缺口：缺滑动窗口/摘要/重要性过滤/结构化抽取四方法体系、层级式摘要、观察遮蔽、主动压缩与 Prompt Caching 层次区分。"
+  },
+  {
+    "id": "AG-13",
+    "question": "13. 在工程实践中，为什么有时候选择「手搓」Agent，而不是直接用成熟框架？",
+    "status": "partial",
+    "location": "第三部分 §13（Q-A28）",
+    "gap": "缺口：§13 只列框架/自研能力边界，缺抽象层排查困难、breaking change、隐性开销等手搓理由与核心手写周边借用折中。"
+  },
+  {
+    "id": "AG-14",
+    "question": "14. 如何赋予 LLM 规划能力？",
+    "status": "partial",
+    "location": "第二部分 Q19 / Q5 / Q2",
+    "gap": "缺口：缺 CoT→ToT→GoT 演进（多路径评估剪枝、图结构复用、3–5 倍成本）与 Planner/Executor/Re-planner 工程编排。"
+  },
+  {
+    "id": "AG-15",
+    "question": "15. 讲讲 Agent 的反思机制？为什么要用反思？具体怎么实现？",
+    "status": "partial",
+    "location": "第二部分 Q5 / Q39 / Q38",
+    "gap": "缺口：缺生成→评估→改进双 prompt 闭环、评估维度与 PASS 出口、步骤级 vs 任务级反思、轮次上限与死循环治理。"
+  },
+  {
+    "id": "AG-16",
+    "question": "16. 如何设计多 Agent 的协作与动态切换机制？",
+    "status": "covered",
+    "location": "第二部分 Q48 / Q49 / Q57 / Q8 / Q54",
+    "gap": "证据：Q57 通信方式表、Q48 State 更新策略、Q49 条件边 vs 动态路由、Q54 规则与模型分工，静态保底+动态兜底取舍齐全。"
+  },
+  {
+    "id": "AG-17",
+    "question": "17. Agent 的上下文工程怎么设计？",
+    "status": "covered",
+    "location": "第二部分 Q17–Q24 整节",
+    "gap": "证据：Q22 定义运行时信息组装，Q23 讲四类内容入上下文，Q17 划清 PE/CE 边界，Q15/Q24 讲预算、隔离与溢出三招。"
+  },
+  {
+    "id": "AG-18",
+    "question": "18. Agent 的多轮对话状态如何管理？如何防止跑偏并支持中断恢复？",
+    "status": "partial",
+    "location": "第二部分 Q48 / Q51 / Q55、第三部分 §18/§19",
+    "gap": "缺口：缺对话历史/业务状态/任务状态/长期记忆四类分层、core_intent 意图锚点、每轮输入分类与状态机防跑偏三道防线。"
+  },
+  {
+    "id": "AG-19",
+    "question": "19. 如何评估一个 Agent 的效果？评测集和指标怎么设计？",
+    "status": "covered",
+    "location": "第一部分 4-1~4-8、第三部分 §20–§25、第二部分 Q58",
+    "gap": "证据：4-5 专讲 Agent 评测复杂性，§20 指标四类表、§21 四概念、§22 Badcase 七步、Q58 轨迹评测与故障注入。"
+  },
+  {
+    "id": "AG-20",
+    "question": "20. Agent 为什么会出现路径震荡、重复调用和死循环？怎么检测和治理？",
+    "status": "partial",
+    "location": "第二部分 Q47 / Q50、第三部分 §18（Q-A37/Q-A38）",
+    "gap": "缺口：缺路径震荡现象与四类根因、动作指纹+输出相似度+调用图多维检测、按错误类型分级治理与 Replan 破环。"
+  },
+  {
+    "id": "AG-21",
+    "question": "21. 线上 Agent 延迟明显升高时，如何通过 Trace 定位和优化？",
+    "status": "partial",
+    "location": "第三部分 §24/§25、第二部分 Q58、第五部分题 31",
+    "gap": "缺口：缺 TTFT vs 总时延口径、瀑布图关键路径、六类瓶颈逐一对照、并行 Span 不相加、回放灰度验证与质量护栏。"
+  },
+  {
+    "id": "AG-22",
+    "question": "22. Multi-Agent 系统如何处理子 Agent 超时、失联和并发修改冲突？",
+    "status": "covered",
+    "location": "第二部分 Q48 / Q50 / Q51 / Q57、第三部分 §16/§19",
+    "gap": "证据：Q50 Lease+Fencing Token、Q48 CAS 更新与 worktree、Q51 租约接管与 checkpoint、Q57 冲突四分类与单一归并节点。"
+  },
+  {
+    "id": "AG-23",
+    "question": "23. Agent 的「任务幻觉」是什么？如何避免没有执行工具却声称任务已经完成？",
+    "status": "partial",
+    "location": "第二部分 Q39、第五部分题 25/题 55",
+    "gap": "缺口：无「任务幻觉」概念、三类幻觉区分、已执行→已验证状态机、完成声明服从外部证据、证据链与错误完成声明率硬门禁。"
+  },
+  {
+    "id": "AG-24",
+    "question": "24. 大模型或 Agent 连接数据库时，如何防止越权、敏感数据泄漏和查询幻觉？",
+    "status": "partial",
+    "location": "第五部分题 22–30 / 题 55、第六部分 MCP 与 LLM 安全清单",
+    "gap": "缺口：缺数据库专属链路——只读账号与行级安全、AST Allowlist、安全视图与结果最小化、指标口径与查询正确性幻觉。"
+  },
+  {
+    "id": "AG-25",
+    "question": "25. Agent Harness 是什么？",
+    "status": "covered",
+    "location": "第二部分 Q34 / Q35",
+    "gap": "证据：Q34 给出定义与三层递进表、组件映射表，Q35 讲 Agent = Model + Harness 及量化案例。"
+  },
+  {
+    "id": "AG-26",
+    "question": "26. 如何设计一个完整的 Agent Harness？",
+    "status": "covered",
+    "location": "第二部分 Q34–Q40 整节、第三部分 §19/§24、第五部分题 52",
+    "gap": "证据：Q36 六层框架+P0/P1/P2+Level 0–4，Q34 组件映射，Q21 装配八步，Q39 验证与状态，§19/§24/题 52 补恢复、权限与 Trace。"
+  },
+  {
+    "id": "AG-27",
+    "question": "27. Agent 的自进化机制如何实现？",
+    "status": "missing",
+    "location": "—",
+    "gap": "缺口：指南无自进化/持续改进闭环章节，仅速答表两行关键词；缺经验库、候选/已验证状态、泛化验证与可撤回发布。"
+  },
+  {
+    "id": "AG-28",
+    "question": "28. Agent 应该在什么情况下请求人工确认？",
+    "status": "covered",
+    "location": "第二部分 Q46、第五部分题 24 / 题 55、第三部分 §19",
+    "gap": "证据：Q46 停止转人工条件与 L0–L4 权限分级，题 24 审批 Token 绑定参数 Hash/资源版本/有效期且确认≠鉴权，§19 HITL 恢复重校验。"
+  },
+  {
+    "id": "AG-29",
+    "question": "29. Agent 的上下文压缩阈值应该如何确定？",
+    "status": "partial",
+    "location": "第二部分 Q24 / Q14、第四部分 Q35",
+    "gap": "缺口：缺预留输出空间与工具结果增长后动态推导阈值、触发边界与压缩目标分离、按任务回放校准阈值的方法。"
+  },
+  {
+    "id": "AG-30",
+    "question": "30. 相同输入为什么会得到不同的 Agent 执行结果？",
+    "status": "partial",
+    "location": "第一部分 1-5（及 6.3 速查）",
+    "gap": "缺口：仅有 Temperature=0 仍不确定的模型层答案，缺 Agent 执行链路方差：相同输入三层次、工具观察与并发、多步放大、最早分歧定位与稳定性分层。"
+  }
+]
