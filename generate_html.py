@@ -55,9 +55,10 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:"Segoe UI","Micro
 #toc>ul>li>a{color:var(--fg);font-weight:600;margin-top:8px}
 #toc a.active{color:var(--accent);border-left-color:var(--accent);background:rgba(122,167,255,.09)}
 #toc li.hide{display:none}
-#main{margin-left:340px;padding:38px 6vw 120px;max-width:1180px}
+#main{margin-left:340px;padding:38px 0 120px;max-width:none}
+#main .wrap{max-width:1180px;margin:0 auto;padding:0 36px}
 #main h1{font-size:30px;line-height:1.4;margin:44px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line);scroll-margin-top:20px}
-#main>h1:first-child{margin-top:0}
+#main .wrap>h1:first-child{margin-top:0}
 #main h2{font-size:22px;margin:34px 0 14px;color:#cfe0ff;scroll-margin-top:20px}
 #main h3{font-size:18px;margin:26px 0 10px;color:#eaf0ff;scroll-margin-top:20px}
 #main h4{font-size:16px;margin:20px 0 8px;color:#d6dcec;scroll-margin-top:20px}
@@ -84,8 +85,8 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:"Segoe UI","Micro
 #top{position:fixed;right:24px;bottom:24px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;font-size:18px;z-index:10}
 #top:hover{border-color:var(--accent);color:var(--accent)}
 #burger{display:none;position:fixed;left:12px;top:12px;z-index:30;background:var(--panel);border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:7px 11px;cursor:pointer}
-@media(max-width:980px){#side{transform:translateX(-100%);transition:transform .2s}#side.open{transform:none}#main{margin-left:0;padding:70px 20px 100px}#burger{display:block}}
-@media print{#side,#top,#burger{display:none}#main{margin:0;max-width:none}body{background:#fff;color:#000}#main h2,#main h3{color:#000}}
+@media(max-width:980px){#side{transform:translateX(-100%);transition:transform .2s}#side.open{transform:none}#main{margin-left:0;padding:70px 0 100px}#main .wrap{padding:0 20px}#burger{display:block}}
+@media print{#side,#top,#burger{display:none}#main{margin:0;padding:0;max-width:none}#main .wrap{max-width:none;padding:0}body{background:#fff;color:#000}#main h2,#main h3{color:#000}}
 """
 
 JS = """
@@ -128,7 +129,7 @@ mermaid.initialize({{startOnLoad:true,theme:'dark'}});
 </header>
 <input id="search" placeholder="筛选目录（Ctrl+K）…" autocomplete="off">
 <nav id="toc">{toc}</nav></aside>
-<main id="main">{body}</main>
+<main id="main"><div class="wrap">{body}</div></main>
 <button id="top" title="回到顶部">↑</button>
 <script>{JS}</script>
 </body></html>
