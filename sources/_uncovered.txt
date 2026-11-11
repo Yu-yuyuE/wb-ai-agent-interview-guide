@@ -1,0 +1,110 @@
+docs_ai_agent_agent-memory.md:49: - 情景记忆（Episodic Memory）：记录特定时间、场景下的具体事件，回答 “What happened?”。例如：“上周三用户反馈订单超时问题”。
+docs_ai_agent_agent-memory.md:50: - 语义记忆（Semantic Memory）：从多个情景中提炼出的通用知识、事实或规律，回答 “What does it mean?”。例如：“该用户对性能问题的敏感度高于功能需求”。
+docs_ai_agent_harness-engineering.md:259: #### Anthropic 为什么借鉴 GAN？
+docs_ai_agent_mcp.md:273: - 字段单位、时间格式、枚举值、默认值是否写清楚？
+docs_ai_agent_mcp.md:274: - 工具接口是否有版本号？
+docs_ai_agent_mcp.md:275: - 不兼容变更有没有灰度和回滚方案？
+docs_ai_agent_mcp.md:276: - 是否能基于 Schema 做自动化校验？
+docs_ai_agent_mcp.md:280: - Server 能访问哪些文件、目录、数据库和 API？
+docs_ai_agent_mcp.md:281: - 是否区分只读工具和写操作工具？
+docs_ai_agent_mcp.md:282: - 高危操作是否需要人工确认？
+docs_ai_agent_mcp.md:283: - 返回结果是否做了脱敏？
+docs_ai_agent_mcp.md:284: - 是否防路径遍历、SQL 注入、命令注入？
+docs_ai_agent_mcp.md:285: - 第三方 MCP Server 是否经过源码、依赖和权限审核？
+docs_ai_agent_mcp.md:289: - 每次用户请求是否有 Trace ID？
+docs_ai_agent_mcp.md:290: - 工具调用参数、耗时、结果摘要、错误码是否有结构化日志？
+docs_ai_agent_mcp.md:291: - 是否能还原一次 Agent 回答背后的完整工具调用链？
+docs_ai_agent_mcp.md:292: - 是否有超时、限流、熔断和重试策略？
+docs_ai_agent_mcp.md:296: - 每次调用是否能关联到用户、业务线、工具和会话？
+docs_ai_agent_mcp.md:297: - Token 成本、API 成本、云资源成本是否能拆分统计？
+docs_ai_agent_mcp.md:298: - 是否有配额和预算告警？
+docs_ai_agent_mcp.md:299: - 模型循环调用工具时，是否有调用次数上限？
+docs_ai_agent_mcp.md:303: - MCP SDK、第三方库、第三方 Server 是否有维护者和更新记录？
+docs_ai_agent_mcp.md:304: - 安全漏洞谁负责跟进？
+docs_ai_agent_mcp.md:305: - Server 升级是否有测试环境和回滚策略？
+docs_ai_agent_multi-agent.md:53: | 每个 Agent 负责什么？    | 子目标、Prompt、工具、上下文和权限是否需要隔离       | 技术调研可以拆成资料检索、数据分析和结论复核           |
+docs_ai_agent_multi-agent.md:54: | 谁决定下一步做什么？     | 流程由代码控制，还是由模型动态选择角色和任务         | 固定审核流程交给代码，不确定的检索方向交给模型         |
+docs_ai_agent_multi-agent.md:55: | 多个 Agent 怎么配合？    | 顺序、并行、路由、交接、循环，还是几种方式组合       | 多路资料检索并行执行，Reviewer 在资料齐全后统一复核    |
+docs_ai_agent_multi-agent.md:56: | Agent 之间交付什么？     | 传完整对话、共享状态，还是只传结构化结果和必要证据   | 检索 Agent 交付结论、引用和 Artifact URI，而非完整对话 |
+docs_ai_agent_multi-agent.md:57: | 怎么记录状态和处理失败？ | 是否单独记录角色状态，超时后重试、跳过、降级还是终止 | 某一路检索超时后保留其他结果，并明确标记缺失项         |
+docs_ai_agent_multi-agent.md:58: | Agent 部署在哪里？       | 同一进程内运行，还是通过网络跨服务、跨团队或跨安全域 | 本地角色可以直接调用，远程角色需要身份、协议和任务状态 |
+docs_ai_agent_multi-agent.md:433: ## 多 Agent 设计最容易犯哪些错误？
+docs_ai_agent_prompt-engineering.md:115: 1. 这个问题涉及哪些关键变量？
+docs_ai_agent_prompt-engineering.md:116: 2. 这些变量之间是什么关系？
+docs_ai_agent_skills.md:45: ## ⭐️SKILL.md 到底怎么写？
+docs_ai_agent_skills.md:208: - 这是项目里的私有知识，还是通用常识？
+docs_ai_agent_workflow-graph-loop.md:435: 4. **Loop 如何防止死循环？** → 三要素：继续条件、退出条件、安全边界（最大轮次 + 超时 + Token 预算）
+docs_ai_agent_workflow-graph-loop.md:437: 6. **条件边和动态路由的区别？** → 条件边候选集在设计时确定、运行时做选择；动态路由候选集在运行时才确定；实际是一个连续谱系
+docs_ai_agent_workflow-graph-loop.md:443: - 节点内的错误怎么处理？（瞬时错误重试、LLM 可恢复错误循环回去、用户可修复错误转人工、意外错误冒泡）
+docs_ai_agent_workflow-graph-loop.md:445: - 工作流有哪些特有的安全风险？（State 污染影响路由、Loop 放大攻击消耗 Token）
+docs_ai_ai-core-concepts.md:155: - `reason` 可以为空吗？最大长度是多少？
+docs_ai_ai-core-concepts.md:156: - 如果用户输入缺少信息，应该返回 `NEED_MORE_INFO`，还是继续猜？
+docs_ai_ai-core-concepts.md:223: - [上下文工程(Context Engineering) 是什么？和 Prompt Engineering 有什么区别？](./agent/context-engineering.md)
+docs_ai_ai-core-concepts.md:394: - 触发：谁来启动这轮任务？手动命令、定时任务、CI 失败、PR 创建、Issue 更新，还是某个消息事件。
+docs_ai_ai-core-concepts.md:395: - 目标：什么状态算完成？全部测试通过、CI green、覆盖率达到某个数值、页面截图对齐设计稿，还是只生成待人工确认的草稿。
+docs_ai_ai-core-concepts.md:398: - 观察：它怎么知道刚才那一步做对了？测试输出、lint、类型检查、截图、审查评论、日志摘要都可以是观察结果。
+docs_ai_interview-questions_agent-project-interview-guide.md:21: 3. 关键方案是根据什么约束选出来的，代价是什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:22: 4. 项目失败过什么，你怎么定位、修复并防止它再次发生？
+docs_ai_interview-questions_agent-project-interview-guide.md:28: ## Agent 项目面试到底在考什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:55: ## 项目复盘表应该写什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:80: ## 如何用一个案例讲清 Agent 项目？
+docs_ai_interview-questions_agent-project-interview-guide.md:96: ### 30 秒版本怎么说？
+docs_ai_interview-questions_agent-project-interview-guide.md:108: ### 3 分钟版本怎么展开？
+docs_ai_interview-questions_agent-project-interview-guide.md:120: ## 如何从一次请求讲清系统架构？
+docs_ai_interview-questions_agent-project-interview-guide.md:151: ## Agent 项目的技术选型应该回答哪些问题？
+docs_ai_interview-questions_agent-project-interview-guide.md:194: ### RAG、Memory、Context 和 State 怎么区分？
+docs_ai_interview-questions_agent-project-interview-guide.md:202: | RAG     | 售后政策、产品手册、服务网点资料                 | 外部知识里有哪些相关证据？   |
+docs_ai_interview-questions_agent-project-interview-guide.md:203: | Memory  | 用户偏好、经过确认且允许长期保留的信息           | 跨轮次或跨会话需要记住什么？ |
+docs_ai_interview-questions_agent-project-interview-guide.md:205: | State   | 当前订单、缺失字段、审批状态、已执行动作、工单号 | 任务现在进行到哪一步？       |
+docs_ai_interview-questions_agent-project-interview-guide.md:247: ### 哪些是框架能力，哪些是项目自己实现的？
+docs_ai_interview-questions_agent-project-interview-guide.md:255: ## 工具调用为什么不能只看模型输出？
+docs_ai_interview-questions_agent-project-interview-guide.md:285: ## Agent 项目的稳定性如何设计？
+docs_ai_interview-questions_agent-project-interview-guide.md:322: ### 如何给 Agent Loop 设置退出边界？
+docs_ai_interview-questions_agent-project-interview-guide.md:332: ### 长任务和人工确认怎样恢复？
+docs_ai_interview-questions_agent-project-interview-guide.md:340: ## Agent 项目的指标应该怎么讲？
+docs_ai_interview-questions_agent-project-interview-guide.md:361: ## Agent 项目的 Badcase 应该怎么复盘？
+docs_ai_interview-questions_agent-project-interview-guide.md:377: ### Agent 为什么会选错相似工具？
+docs_ai_interview-questions_agent-project-interview-guide.md:387: ### 创建工单超时为什么会产生重复记录？
+docs_ai_interview-questions_agent-project-interview-guide.md:399: ## 如何用 Trace 还原 Agent 的执行过程？
+docs_ai_interview-questions_agent-project-interview-guide.md:419: ## 面试前要做哪些准备？
+docs_ai_llm-basis_llm-evaluation.md:200: - 事实准确性：模型回答与参考答案的事实是否一致？
+docs_ai_llm-basis_llm-evaluation.md:201: - 完整性：参考答案中的关键信息是否都在模型回答中体现？
+docs_ai_llm-basis_llm-evaluation.md:202: - 措辞清晰度：模型回答是否清楚易懂？
+docs_ai_llm-basis_llm-evaluation.md:622: 1. **格式合法率**：输出是不是合法 JSON？用 `JSON.parse()` 就能检测，不需要人工。
+docs_ai_llm-basis_llm-evaluation.md:623: 2. **Schema 通过率**：合法 JSON 里，有多少通过了你定义的 JSON Schema 校验？它主要检查字段完整性、类型、枚举范围。
+docs_ai_llm-basis_structured-output-function-calling.md:46: - `reason` 可以为空吗？最大长度是多少？
+docs_ai_llm-basis_structured-output-function-calling.md:47: - 如果用户输入缺少信息，应该返回 `NEED_MORE_INFO`，还是继续猜？
+docs_ai_llm-basis_structured-output-function-calling.md:962: - “信息不足”“无需操作”等状态是否有明确枚举？
+docs_ai_llm-basis_structured-output-function-calling.md:964: - 多个消费者共用时，是否通过 `schemaVersion` 区分版本？
+docs_ai_llm-basis_structured-output-function-calling.md:969: - 是否控制输出长度，避免 JSON 被截断？
+docs_ai_llm-basis_structured-output-function-calling.md:970: - 是否避免在结构化输出任务里使用过高的采样随机性？
+docs_ai_llm-basis_structured-output-function-calling.md:975: - 是否做 Schema 校验？
+docs_ai_llm-basis_structured-output-function-calling.md:976: - 是否做业务校验和权限校验？
+docs_ai_llm-basis_structured-output-function-calling.md:987: - 是否能根据失败样本反推 Schema 和 Prompt 的改进点？
+docs_ai_rag_graphrag.md:51: - “某个 API 的限流规则是多少？”
+docs_ai_rag_graphrag.md:80: - “这几份报告背后共同指向的战略主题是什么？”
+docs_ai_rag_graphrag.md:264: | 局部事实 | 向量检索或局部图检索 | “某个接口的超时时间是多少？”             |
+docs_ai_rag_graphrag.md:265: | 实体关系 | 局部图检索           | “订单中心依赖哪些服务？”                 |
+docs_ai_rag_graphrag.md:266: | 多跳推理 | 图遍历 + 向量补证据  | “某负责人参与过哪些影响支付链路的事故？” |
+docs_ai_rag_graphrag.md:267: | 全局归纳 | 社区摘要 + 全局检索  | “这批报告的主要风险主题是什么？”         |
+docs_ai_rag_graphrag.md:268: | 精确过滤 | 图查询或结构化查询   | “2025 年 Q4 哪些项目依赖供应商 A？”      |
+docs_ai_rag_graphrag.md:282: - **企业知识库的复杂问答**：问题需要跨部门、跨制度、跨项目复盘串联信息，比如“这个流程涉及哪些部门？每个部门承担什么职责？”“某条制度和哪些历史制度冲突？”。
+docs_ai_rag_graphrag.md:414: - 用户能看某条边，但能不能看边连接的另一个实体？
+docs_ai_rag_graphrag.md:567: - [Neo4j：What Is GraphRAG?](https://neo4j.com/blog/genai/what-is-graphrag/)
+docs_ai_rag_rag-evaluation.md:27: | 检索结果 | 回答需要的证据有没有找到？       | 是否同时找到“20 MB”和“7 天”            |
+docs_ai_rag_rag-evaluation.md:28: | 生成回答 | 答案是否正确、完整、有依据？     | 有没有把专业版的 100 MB 当成标准版上限 |
+docs_ai_rag_rag-evaluation.md:29: | 执行过程 | 请求有没有完成，代价是否可接受？ | 是否超时、总耗时和 Token 用量是多少    |
+docs_ai_system-design_ai-observability.md:47: | Metrics    | 系统整体是否异常？             | 请求量、错误率、P95 延迟、Token 用量、工具失败率 |
+docs_ai_system-design_ai-observability.md:48: | Logs       | 某个时间点发生了什么事件？     | 异常堆栈、状态变更、重试原因、业务告警           |
+docs_ai_system-design_ai-observability.md:49: | Trace      | 一次请求经历了什么？           | 模型调用、检索、工具调用、Agent 执行和上下游关系 |
+docs_ai_system-design_ai-observability.md:51: | Audit      | 谁在什么权限下执行了什么操作？ | 用户身份、审批记录、权限决策、外部写操作         |
+docs_ai_system-design_llm-security.md:740: - 外部网页、邮件、RAG、Memory 和工具结果是否统一标记为不可信内容？
+docs_ai_system-design_llm-security.md:744: - 多模态、HTML、OCR 和编码内容是否进入对抗测试？
+docs_ai_system-design_llm-security.md:748: - 工具是否按具体业务动作拆分，避免任意 SQL、Shell 和 URL？
+docs_ai_system-design_llm-security.md:749: - 身份、租户和角色是否只来自服务端认证上下文？
+docs_ai_system-design_llm-security.md:750: - 是否同时做 Schema、业务语义、资源权限和风险策略校验？
+docs_ai_system-design_llm-security.md:757: - 是否审查启动命令、依赖安装脚本、工具描述和权限申请？
+docs_ai_system-design_llm-security.md:764: - 文件、网络、CPU、内存、进程数和执行时间是否有限制？
+docs_ai_system-design_llm-security.md:765: - Prompt、日志、Trace 和评测集中是否可能出现密钥或 PII？
+docs_ai_system-design_llm-security.md:766: - 数据留存、加密、访问控制和删除策略是否明确？
+docs_ai_system-design_llm-security.md:771: - 是否统计攻击成功、越权操作、数据泄露、审批绕过和误拦截？

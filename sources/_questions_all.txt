@@ -1,0 +1,839 @@
+docs_ai_README.md:113: - [Loop Engineering 是什么？为什么说它是新瓶装旧酒？](./agent/loop-engineering.md)：说明代码 Agent 外层循环的触发、上下文、验证、状态和停止条件。
+docs_ai_README.md:135: - 大模型的 Token、上下文窗口、Temperature、Top P 分别会影响什么？
+docs_ai_README.md:136: - 为什么结构化输出不能只依赖 Prompt？JSON Schema、Function Calling 和服务端校验分别解决什么问题？
+docs_ai_README.md:137: - Agent 和 Workflow 有什么区别？Agent Loop 中观察、规划、行动、反思如何协作？
+docs_ai_README.md:138: - Prompt Engineering 和 Context Engineering 有什么区别？
+docs_ai_README.md:139: - MCP 解决了什么问题？它和 Function Calling、Tool Calling 是什么关系？
+docs_ai_README.md:140: - RAG 为什么会答非所问？应该从召回、排序、上下文压缩还是生成阶段排查？
+docs_ai_README.md:141: - 向量数据库如何选型？HNSW、IVFFLAT 这些索引适合什么场景？
+docs_ai_README.md:142: - AI 应用怎么评测？Golden Set、LLM-as-Judge、线上灰度和 Trace 回放如何串起来？
+docs_ai_README.md:143: - 生产级 AI 应用为什么需要模型网关？如何做限流、fallback、成本控制和审计？
+docs_ai_TODO.md:49: | `finetune-vs-rag.md`    | 微调、蒸馏与 RAG 怎么选：什么时候该做数据训练？              | SFT / LoRA / DPO / RFT 原理对比，什么时候调 Prompt 已经不够了    |
+docs_ai_agent_README.md:59: - [Loop Engineering 是什么？为什么说它是新瓶装旧酒？](./loop-engineering.md)：把 Loop Engineering 放回 Agent Loop、Context、Harness、Skills、MCP 和验证闭环里，理解它到底新在哪里。
+docs_ai_agent_README.md:68: - Agent 和 Workflow、Chatbot、普通工具调用有什么区别？
+docs_ai_agent_README.md:69: - Agent Loop 中观察、规划、行动、反思分别负责什么？
+docs_ai_agent_README.md:70: - Memory 应该存什么、不存什么？如何避免污染和隐私风险？
+docs_ai_agent_README.md:71: - Prompt Engineering 和 Context Engineering 为什么不能混为一谈？
+docs_ai_agent_README.md:72: - MCP、Skills、Function Calling 的边界分别在哪里？
+docs_ai_agent_README.md:73: - 长任务 Agent 如何控制上下文、权限、失败重试和可观测性？
+docs_ai_agent_agent-basis.md:53: ### Agent、传统编程和 Workflow 区别？
+docs_ai_agent_agent-basis.md:69: ### Agent 面临的挑战有哪些？
+docs_ai_agent_agent-basis.md:82: ## 什么是 AI Agent？
+docs_ai_agent_agent-basis.md:100: ### 什么是 Agent Loop？
+docs_ai_agent_agent-basis.md:112: ### 做一个 Agent 系统，最少要搞定哪三层？
+docs_ai_agent_agent-basis.md:120: ## Tools 注册与调用遵循什么标准格式？
+docs_ai_agent_agent-basis.md:219: ## 什么是 Prompt Engineering？
+docs_ai_agent_agent-basis.md:223: ## 什么是 Context Engineering？
+docs_ai_agent_agent-basis.md:235: ## Agent 核心范式有哪些？
+docs_ai_agent_agent-basis.md:344: ## AI 工作流和 Agent 到底是什么关系？
+docs_ai_agent_agent-basis.md:352: ### 工作流里的 Node、Edge、State 是什么？
+docs_ai_agent_agent-basis.md:362: ### 什么时候用 Agent，什么时候用 Workflow？
+docs_ai_agent_agent-basis.md:374: ## 各范式怎么选？
+docs_ai_agent_agent-memory.md:17: ## Agent 的记忆系统是如何设计的？
+docs_ai_agent_agent-memory.md:25: ### 记忆有哪些存储形式？
+docs_ai_agent_agent-memory.md:37: ### 记忆在功能上如何分类？
+docs_ai_agent_agent-memory.md:49: - 情景记忆（Episodic Memory）：记录特定时间、场景下的具体事件，回答 “What happened?”。例如：“上周三用户反馈订单超时问题”。
+docs_ai_agent_agent-memory.md:50: - 语义记忆（Semantic Memory）：从多个情景中提炼出的通用知识、事实或规律，回答 “What does it mean?”。例如：“该用户对性能问题的敏感度高于功能需求”。
+docs_ai_agent_agent-memory.md:53: ### 记忆操作的生命周期是怎样的？
+docs_ai_agent_agent-memory.md:76: ### 什么是短期记忆（Short-Term Memory / Working Memory）？
+docs_ai_agent_agent-memory.md:96: ### 什么是长期记忆（Long-Term Memory）？
+docs_ai_agent_agent-memory.md:108: ### 长期记忆和 RAG 有什么区别？
+docs_ai_agent_agent-memory.md:120: ## 主流的记忆技术架构有哪些？
+docs_ai_agent_agent-memory.md:124: ### 底层存储架构通常包含哪些层级？
+docs_ai_agent_agent-memory.md:146: ### 主流 Memory 产品如何对比？
+docs_ai_agent_agent-memory.md:159: ### LETTA、ZEP、MemOS 有什么不同？
+docs_ai_agent_agent-memory.md:175: ## 记忆的高级演化机制有哪些？
+docs_ai_agent_agent-memory.md:181: ### 记忆反思与合成如何实现？
+docs_ai_agent_agent-memory.md:195: ### 记忆的清理与遗忘机制是怎样的？
+docs_ai_agent_agent-memory.md:211: ## 如何优化长期记忆的检索效果？
+docs_ai_agent_agent-memory.md:217: ### 混合检索与元数据过滤怎么做？
+docs_ai_agent_agent-memory.md:231: ### 为什么检索链路优化往往先于写入策略？
+docs_ai_agent_agent-memory.md:239: ## 生产级记忆系统架构要关注哪些要点？
+docs_ai_agent_agent-memory.md:251: ## 如何用 Markdown 存储 Agent 记忆？
+docs_ai_agent_agent-memory.md:255: ### 为什么 Markdown 可以作为 Agent 记忆？
+docs_ai_agent_agent-memory.md:269: ### Claude Code 的 `CLAUDE.md` 机制是怎样的？
+docs_ai_agent_agent-memory.md:273: #### `CLAUDE.md` 里该写什么、不该写什么？
+docs_ai_agent_agent-memory.md:287: #### 怎么写才能让 Claude 真正遵守？
+docs_ai_agent_agent-memory.md:307: #### `CLAUDE.md` 文件的层级结构是怎样的？
+docs_ai_agent_agent-memory.md:356: #### AGENTS.md 和 CLAUDE.md 是什么关系？
+docs_ai_agent_agent-memory.md:368: #### Auto Memory 是什么？
+docs_ai_agent_agent-memory.md:378: ### Markdown 记忆如何分层设计？
+docs_ai_agent_agent-memory.md:388: ### Markdown 记忆和传统长期记忆的边界在哪里？
+docs_ai_agent_agent-memory.md:408: ### Markdown 记忆应如何维护？
+docs_ai_agent_context-engineering.md:15: ## 同样的 Agent，为什么表现差这么多？
+docs_ai_agent_context-engineering.md:44: ## Context Engineering 到底在做什么？
+docs_ai_agent_context-engineering.md:91: ## 上下文为什么会失效？
+docs_ai_agent_context-engineering.md:125: ## 怎么评估上下文工程有没有变好？
+docs_ai_agent_context-engineering.md:141: ## 运行时上下文怎么加载？
+docs_ai_agent_context-engineering.md:177: ## 长任务里，上下文怎么撑住？
+docs_ai_agent_context-engineering.md:217: ## Context Engineering 到底怎么落地？
+docs_ai_agent_context-engineering.md:363: ## 做 Context Engineering 会用到哪些工具？
+docs_ai_agent_harness-engineering.md:19: ## Harness 是什么？
+docs_ai_agent_harness-engineering.md:47: ### Harness 包含哪些组件？
+docs_ai_agent_harness-engineering.md:66: ### 一个成熟的 Harness 长什么样？
+docs_ai_agent_harness-engineering.md:89: ### 为什么瓶颈经常不在模型？
+docs_ai_agent_harness-engineering.md:99: ### 为什么上下文喂越多，Agent 反而越蠢？
+docs_ai_agent_harness-engineering.md:116: ### 从哪里开始搭 Harness？
+docs_ai_agent_harness-engineering.md:147: ### 你的 Harness 到哪个阶段了？
+docs_ai_agent_harness-engineering.md:259: #### Anthropic 为什么借鉴 GAN？
+docs_ai_agent_loop-engineering.md:17: ## Loop Engineering 到底是什么？
+docs_ai_agent_loop-engineering.md:29: ## 它其实借了哪些老概念？
+docs_ai_agent_loop-engineering.md:100: ## 那它到底新在哪？
+docs_ai_agent_loop-engineering.md:110: ## Claude Code 的 /loop、/goal 可以怎么理解？
+docs_ai_agent_loop-engineering.md:145: ## Loop 可以分成几类？
+docs_ai_agent_loop-engineering.md:158: ## 一个可落地的 Loop 长什么样？
+docs_ai_agent_loop-engineering.md:193: ## 什么场景值得做 Loop？
+docs_ai_agent_loop-engineering.md:323: ### 什么会触发下一轮？
+docs_ai_agent_loop-engineering.md:327: ### 什么时候继续，什么时候停？
+docs_ai_agent_mcp.md:19: ## MCP 到底是什么？
+docs_ai_agent_mcp.md:45: ## MCP、Function Calling、Agent 到底是什么关系？
+docs_ai_agent_mcp.md:79: ## MCP 里到底有哪些东西？
+docs_ai_agent_mcp.md:93: ## 一次 MCP 调用大概怎么走？
+docs_ai_agent_mcp.md:105: ## MCP 暴露的能力只有 Tools 吗？
+docs_ai_agent_mcp.md:147: ## 为什么 MCP 用 JSON-RPC？
+docs_ai_agent_mcp.md:212: ## stdio 和 Streamable HTTP 怎么选？
+docs_ai_agent_mcp.md:242: ## MCP 的意义只是让模型会调接口吗？
+docs_ai_agent_mcp.md:252: ## MCP 接进来之后，就能直接上生产吗？
+docs_ai_agent_mcp.md:268: ## 企业落地 MCP 前，应该先检查哪些问题？
+docs_ai_agent_mcp.md:272: - 每个工具是否有明确输入输出 Schema？
+docs_ai_agent_mcp.md:273: - 字段单位、时间格式、枚举值、默认值是否写清楚？
+docs_ai_agent_mcp.md:274: - 工具接口是否有版本号？
+docs_ai_agent_mcp.md:275: - 不兼容变更有没有灰度和回滚方案？
+docs_ai_agent_mcp.md:276: - 是否能基于 Schema 做自动化校验？
+docs_ai_agent_mcp.md:280: - Server 能访问哪些文件、目录、数据库和 API？
+docs_ai_agent_mcp.md:281: - 是否区分只读工具和写操作工具？
+docs_ai_agent_mcp.md:282: - 高危操作是否需要人工确认？
+docs_ai_agent_mcp.md:283: - 返回结果是否做了脱敏？
+docs_ai_agent_mcp.md:284: - 是否防路径遍历、SQL 注入、命令注入？
+docs_ai_agent_mcp.md:285: - 第三方 MCP Server 是否经过源码、依赖和权限审核？
+docs_ai_agent_mcp.md:289: - 每次用户请求是否有 Trace ID？
+docs_ai_agent_mcp.md:290: - 工具调用参数、耗时、结果摘要、错误码是否有结构化日志？
+docs_ai_agent_mcp.md:291: - 是否能还原一次 Agent 回答背后的完整工具调用链？
+docs_ai_agent_mcp.md:292: - 是否有超时、限流、熔断和重试策略？
+docs_ai_agent_mcp.md:296: - 每次调用是否能关联到用户、业务线、工具和会话？
+docs_ai_agent_mcp.md:297: - Token 成本、API 成本、云资源成本是否能拆分统计？
+docs_ai_agent_mcp.md:298: - 是否有配额和预算告警？
+docs_ai_agent_mcp.md:299: - 模型循环调用工具时，是否有调用次数上限？
+docs_ai_agent_mcp.md:303: - MCP SDK、第三方库、第三方 Server 是否有维护者和更新记录？
+docs_ai_agent_mcp.md:304: - 安全漏洞谁负责跟进？
+docs_ai_agent_mcp.md:305: - Server 升级是否有测试环境和回滚策略？
+docs_ai_agent_mcp.md:306: - 是否避免把核心能力押在无人维护的三方扩展上？
+docs_ai_agent_mcp.md:310: ## 写 MCP Server 时，有什么需要注意的？
+docs_ai_agent_multi-agent.md:25: ## 多 Agent 和多阶段 Prompt Chain 有什么区别？
+docs_ai_agent_multi-agent.md:47: ## 如果让你设计一个多 Agent 系统，你会先考虑哪些问题？
+docs_ai_agent_multi-agent.md:53: | 每个 Agent 负责什么？    | 子目标、Prompt、工具、上下文和权限是否需要隔离       | 技术调研可以拆成资料检索、数据分析和结论复核           |
+docs_ai_agent_multi-agent.md:54: | 谁决定下一步做什么？     | 流程由代码控制，还是由模型动态选择角色和任务         | 固定审核流程交给代码，不确定的检索方向交给模型         |
+docs_ai_agent_multi-agent.md:55: | 多个 Agent 怎么配合？    | 顺序、并行、路由、交接、循环，还是几种方式组合       | 多路资料检索并行执行，Reviewer 在资料齐全后统一复核    |
+docs_ai_agent_multi-agent.md:56: | Agent 之间交付什么？     | 传完整对话、共享状态，还是只传结构化结果和必要证据   | 检索 Agent 交付结论、引用和 Artifact URI，而非完整对话 |
+docs_ai_agent_multi-agent.md:57: | 怎么记录状态和处理失败？ | 是否单独记录角色状态，超时后重试、跳过、降级还是终止 | 某一路检索超时后保留其他结果，并明确标记缺失项         |
+docs_ai_agent_multi-agent.md:58: | Agent 部署在哪里？       | 同一进程内运行，还是通过网络跨服务、跨团队或跨安全域 | 本地角色可以直接调用，远程角色需要身份、协议和任务状态 |
+docs_ai_agent_multi-agent.md:62: ## 什么时候值得用多 Agent？
+docs_ai_agent_multi-agent.md:76: ## AgentInvest 中的四个 Agent 是怎么协作的？
+docs_ai_agent_multi-agent.md:96: ## 多 Agent 应该选择哪种编排模式？
+docs_ai_agent_multi-agent.md:118: ### 角色应该静态拆分还是动态委派？
+docs_ai_agent_multi-agent.md:128: ## 如何把子任务拆成可执行契约？
+docs_ai_agent_multi-agent.md:153: ### 怎么判断子任务能否并行？
+docs_ai_agent_multi-agent.md:161: ### 怎么防止角色重复工作和结果缺失？
+docs_ai_agent_multi-agent.md:169: ## Agent 之间应该怎样通信和共享状态？
+docs_ai_agent_multi-agent.md:189: ### 如何控制共享状态的大小？
+docs_ai_agent_multi-agent.md:195: ### 多 Agent 的运行状态应该记录什么？
+docs_ai_agent_multi-agent.md:225: ## A2A 能解决什么，不能解决什么？
+docs_ai_agent_multi-agent.md:235: ## 多 Agent 的并发冲突怎么处理？
+docs_ai_agent_multi-agent.md:246: ### 并行状态怎么归并？
+docs_ai_agent_multi-agent.md:252: ### 多个 Agent 的事实结论冲突怎么办？
+docs_ai_agent_multi-agent.md:275: ### 为什么 Lease 还要配 Fencing Token？
+docs_ai_agent_multi-agent.md:285: ## 任务生命周期应该如何建模？
+docs_ai_agent_multi-agent.md:316: ## 多 Agent 失败后如何恢复？
+docs_ai_agent_multi-agent.md:332: ### 如何限制重试次数和总预算？
+docs_ai_agent_multi-agent.md:338: ### Checkpoint 应该保存在哪里？
+docs_ai_agent_multi-agent.md:348: ### Agent 超时后怎么处理？
+docs_ai_agent_multi-agent.md:358: ### 部分失败时，是等、降级还是返回部分结果？
+docs_ai_agent_multi-agent.md:366: ### 外部副作用怎么补偿？
+docs_ai_agent_multi-agent.md:374: ## Human-in-the-loop 如何暂停和恢复任务？
+docs_ai_agent_multi-agent.md:382: ## 如何观测一次多 Agent 运行？
+docs_ai_agent_multi-agent.md:411: ### 多 Agent 需要哪些特有指标？
+docs_ai_agent_multi-agent.md:419: ## 多 Agent 怎么评测？
+docs_ai_agent_multi-agent.md:433: ## 多 Agent 设计最容易犯哪些错误？
+docs_ai_agent_multi-agent.md:435: ### 角色名称能直接作为 Agent 边界吗？
+docs_ai_agent_multi-agent.md:441: ### 多 Agent 一定要并行吗？
+docs_ai_agent_multi-agent.md:445: ### 确定性步骤需要交给 Agent 吗？
+docs_ai_agent_multi-agent.md:449: ### 所有 Agent 都应该共享完整上下文吗？
+docs_ai_agent_multi-agent.md:453: ### 并行写冲突能交给模型商量吗？
+docs_ai_agent_multi-agent.md:459: ### 只设计正常执行路径会有什么问题？
+docs_ai_agent_multi-agent.md:463: ### 为什么不能只验收最终回复？
+docs_ai_agent_prompt-engineering.md:15: ## 什么是 Prompt？
+docs_ai_agent_prompt-engineering.md:21: ## Prompt 应该怎么写？
+docs_ai_agent_prompt-engineering.md:88: ## 常用提示技巧有哪些？
+docs_ai_agent_prompt-engineering.md:115: 1. 这个问题涉及哪些关键变量？
+docs_ai_agent_prompt-engineering.md:116: 2. 这些变量之间是什么关系？
+docs_ai_agent_prompt-engineering.md:117: 3. 最终答案如何验证？
+docs_ai_agent_prompt-engineering.md:292: ## 复杂场景怎么处理？
+docs_ai_agent_skills.md:15: ## Agent Skills 是什么？
+docs_ai_agent_skills.md:21: ## Skill 和 Prompt、MCP、Function Calling 有什么联系？
+docs_ai_agent_skills.md:45: ## ⭐️SKILL.md 到底怎么写？
+docs_ai_agent_skills.md:207: - Agent 真的需要这段解释吗？
+docs_ai_agent_skills.md:208: - 这是项目里的私有知识，还是通用常识？
+docs_ai_agent_skills.md:209: - 这段话值不值得占用上下文？
+docs_ai_agent_skills.md:273: ## 自由度怎么把控？
+docs_ai_agent_skills.md:339: ### 为什么不能把所有 Skill 一次性全塞进去？
+docs_ai_agent_skills.md:385: ### 实际项目中怎么组织文件？
+docs_ai_agent_skills.md:434: ## 工作流和反馈循环怎么设计？
+docs_ai_agent_skills.md:589: ## Skill 路由怎么做？
+docs_ai_agent_workflow-graph-loop.md:16: ## 为什么 AI 系统需要工作流？
+docs_ai_agent_workflow-graph-loop.md:32: ## 传统工作流和 AI 工作流有什么区别？
+docs_ai_agent_workflow-graph-loop.md:57: ## Graph 和 Loop 是什么？
+docs_ai_agent_workflow-graph-loop.md:130: ## Workflow、Graph 和 Loop 有什么关系？
+docs_ai_agent_workflow-graph-loop.md:366: ## 工作流落地的时候有没有遇到什么坑？
+docs_ai_agent_workflow-graph-loop.md:380: - 最大轮次是多少？
+docs_ai_agent_workflow-graph-loop.md:381: - 评分阈值是多少？
+docs_ai_agent_workflow-graph-loop.md:382: - 超时或成本超限时怎么办？
+docs_ai_agent_workflow-graph-loop.md:432: 1. **为什么 AI 系统需要工作流？** → LLM 输出不确定，需要动态决策、自动修正和可控收敛
+docs_ai_agent_workflow-graph-loop.md:433: 2. **Workflow、Graph、Loop 三者什么关系？** → Workflow 是目标与过程，Graph 是结构与载体，Loop 是图上的控制模式
+docs_ai_agent_workflow-graph-loop.md:434: 3. **Graph Loop 和 Agent Loop 有什么区别？** → Agent Loop 是 Agent 的顶层运行引擎（推理→行动→观察循环），Graph Loop 是 Graph 内部的回溯控制模式（特定节点子集通过回边迭代修正），两者可以嵌套
+docs_ai_agent_workflow-graph-loop.md:435: 4. **Loop 如何防止死循环？** → 三要素：继续条件、退出条件、安全边界（最大轮次 + 超时 + Token 预算）
+docs_ai_agent_workflow-graph-loop.md:436: 5. **State 的更新策略怎么选？** → 单值字段用 Replace，累积字段用 Append，并行写入字段必须用 Reducer
+docs_ai_agent_workflow-graph-loop.md:437: 6. **条件边和动态路由的区别？** → 条件边候选集在设计时确定、运行时做选择；动态路由候选集在运行时才确定；实际是一个连续谱系
+docs_ai_agent_workflow-graph-loop.md:438: 7. **怎么理解 Graph 的抽象设计？** → Node 抽象职责边界（产出什么），Edge 抽象流转规则（何时去哪），State 抽象必须持久记住的信息
+docs_ai_agent_workflow-graph-loop.md:442: - 工作流中断后怎么恢复？（持久化 + checkpoint 机制）
+docs_ai_agent_workflow-graph-loop.md:443: - 节点内的错误怎么处理？（瞬时错误重试、LLM 可恢复错误循环回去、用户可修复错误转人工、意外错误冒泡）
+docs_ai_agent_workflow-graph-loop.md:444: - Spring AI Alibaba 和 LangGraph 的循环实现有什么区别？（前者可用条件边回指或 LoopAgent，后者需自行维护计数器）
+docs_ai_agent_workflow-graph-loop.md:445: - 工作流有哪些特有的安全风险？（State 污染影响路由、Loop 放大攻击消耗 Token）
+docs_ai_ai-core-concepts.md:30: - [大模型提示词工程（Prompt Engineering）是什么？提示词技巧有哪些？](./agent/prompt-engineering.md)
+docs_ai_ai-core-concepts.md:155: - `reason` 可以为空吗？最大长度是多少？
+docs_ai_ai-core-concepts.md:156: - 如果用户输入缺少信息，应该返回 `NEED_MORE_INFO`，还是继续猜？
+docs_ai_ai-core-concepts.md:223: - [上下文工程(Context Engineering) 是什么？和 Prompt Engineering 有什么区别？](./agent/context-engineering.md)
+docs_ai_ai-core-concepts.md:226: - [什么是 Model Context Protocol (MCP)？和 Function Calling、Agent 什么关系？](./agent/mcp.md)
+docs_ai_ai-core-concepts.md:227: - [Agent Skills 是什么？和 Prompt、MCP 到底差在哪？](./agent/skills.md)
+docs_ai_ai-core-concepts.md:229: - [Loop Engineering 是什么？为什么说它是新瓶装旧酒？](./agent/loop-engineering.md)
+docs_ai_ai-core-concepts.md:231: ### 什么是 Agent？
+docs_ai_ai-core-concepts.md:394: - 触发：谁来启动这轮任务？手动命令、定时任务、CI 失败、PR 创建、Issue 更新，还是某个消息事件。
+docs_ai_ai-core-concepts.md:395: - 目标：什么状态算完成？全部测试通过、CI green、覆盖率达到某个数值、页面截图对齐设计稿，还是只生成待人工确认的草稿。
+docs_ai_ai-core-concepts.md:398: - 观察：它怎么知道刚才那一步做对了？测试输出、lint、类型检查、截图、审查评论、日志摘要都可以是观察结果。
+docs_ai_ai-core-concepts.md:417: ### 什么是 RAG？
+docs_ai_ai-core-concepts.md:452: - “如何申请退款？”
+docs_ai_ai-core-concepts.md:453: - “退款流程是什么？”
+docs_ai_ai-core-concepts.md:454: - “订单怎么取消并退钱？”
+docs_ai_ai-core-concepts.md:556: - “这个报错咋整？”
+docs_ai_ai-core-concepts.md:557: - “钱能退吗？”
+docs_ai_ai-core-concepts.md:558: - “线上那个限流问题是不是又来了？”
+docs_ai_interview-questions_README.md:51: - 面试官问“你做过 AI 应用吗”，如何从业务场景、架构、效果评测和上线治理回答？
+docs_ai_interview-questions_README.md:52: - 大模型 API 调用为什么需要重试、限流、fallback 和结构化校验？
+docs_ai_interview-questions_README.md:53: - Agent 和普通工作流的区别是什么？
+docs_ai_interview-questions_README.md:54: - RAG 检索不到、检索错、生成错分别怎么排查？
+docs_ai_interview-questions_README.md:55: - AI 应用系统设计如何体现稳定性、可观测性、成本控制和安全治理？
+docs_ai_interview-questions_agent-interview-questions.md:29: - AI Agent 是什么？和普通 Chatbot 有什么区别？
+docs_ai_interview-questions_agent-interview-questions.md:30: - Agent = LLM + Planning + Memory + Tools 这条公式怎么理解？
+docs_ai_interview-questions_agent-interview-questions.md:31: - Agent Loop 的完整流程是什么？
+docs_ai_interview-questions_agent-interview-questions.md:32: - Agent 和传统编程、Workflow 的核心区别是什么？
+docs_ai_interview-questions_agent-interview-questions.md:33: - ReAct、Plan-and-Execute、Reflection、Multi-Agent 分别适合什么场景？
+docs_ai_interview-questions_agent-interview-questions.md:34: - Tools 注册时，工具 description 为什么很关键？
+docs_ai_interview-questions_agent-interview-questions.md:35: - 什么时候用纯 Agent，什么时候用 Workflow 或 Agentic Workflow？
+docs_ai_interview-questions_agent-interview-questions.md:36: - Multi-Agent 协作的主要问题是什么？为什么生产里不能盲目上多 Agent？
+docs_ai_interview-questions_agent-interview-questions.md:50: - Agent 的短期记忆和长期记忆有什么区别？
+docs_ai_interview-questions_agent-interview-questions.md:51: - Agent 记忆系统要解决哪些核心问题？
+docs_ai_interview-questions_agent-interview-questions.md:52: - 向量记忆和 Markdown 记忆分别适合什么场景？
+docs_ai_interview-questions_agent-interview-questions.md:53: - Auto Memory 是什么？它为什么不能无限自动写入？
+docs_ai_interview-questions_agent-interview-questions.md:54: - 哪些团队共享记忆适合走 Git 和 Code Review，哪些更适合数据库？
+docs_ai_interview-questions_agent-interview-questions.md:55: - 记忆压缩、记忆过期、记忆冲突应该怎么处理？
+docs_ai_interview-questions_agent-interview-questions.md:56: - 如何避免长期记忆污染上下文？
+docs_ai_interview-questions_agent-interview-questions.md:57: - 面试里怎么讲“有记忆”不是简单保存聊天记录？
+docs_ai_interview-questions_agent-interview-questions.md:69: - Prompt Engineering 和 Context Engineering 有什么区别？
+docs_ai_interview-questions_agent-interview-questions.md:70: - Prompt 四要素 Role、Task、Context、Format 分别解决什么问题？
+docs_ai_interview-questions_agent-interview-questions.md:71: - Few-Shot、CoT、任务分解、结构化输出分别适合什么场景？
+docs_ai_interview-questions_agent-interview-questions.md:72: - Prompt 注入攻击是什么？常见防护方式有哪些？
+docs_ai_interview-questions_agent-interview-questions.md:73: - 为什么 Agent 场景下只优化 Prompt 不够？
+docs_ai_interview-questions_agent-interview-questions.md:74: - Context Engineering 要解决哪些问题？
+docs_ai_interview-questions_agent-interview-questions.md:75: - 静态规则、动态信息、工具结果、记忆应该如何进入上下文？
+docs_ai_interview-questions_agent-interview-questions.md:76: - 长任务上下文溢出时，Compaction、结构化笔记、Sub-agent 分别怎么用？
+docs_ai_interview-questions_agent-interview-questions.md:88: - MCP 解决什么问题？为什么常被类比成 AI 领域的 USB-C？
+docs_ai_interview-questions_agent-interview-questions.md:89: - MCP Client、MCP Server、Host 分别是什么？
+docs_ai_interview-questions_agent-interview-questions.md:90: - MCP 的 Tools、Resources、Prompts 分别解决什么问题？
+docs_ai_interview-questions_agent-interview-questions.md:91: - MCP 和 Function Calling 有什么区别？
+docs_ai_interview-questions_agent-interview-questions.md:92: - 生产级 MCP Server 要做哪些安全治理？
+docs_ai_interview-questions_agent-interview-questions.md:93: - Agent Skills 是什么？它和 Prompt、MCP、Function Calling 的边界是什么？
+docs_ai_interview-questions_agent-interview-questions.md:94: - Skills 为什么要延迟加载？
+docs_ai_interview-questions_agent-interview-questions.md:95: - Skill 路由怎么做？为什么它和 RAG 相似但目标不同？
+docs_ai_interview-questions_agent-interview-questions.md:96: - 写一个 `SKILL.md` 最容易踩哪些坑？
+docs_ai_interview-questions_agent-interview-questions.md:106: - Harness Engineering 是什么？它和 Prompt Engineering、Context Engineering 有什么关系？
+docs_ai_interview-questions_agent-interview-questions.md:107: - 为什么说 Agent = Model + Harness？
+docs_ai_interview-questions_agent-interview-questions.md:108: - JavaGuide AI Agent 专题归纳的 Harness 六层检查框架分别解决什么问题？
+docs_ai_interview-questions_agent-interview-questions.md:109: - 模型能力升级后，Harness 里的某些机制为什么需要重新验证？
+docs_ai_interview-questions_agent-interview-questions.md:110: - 上下文污染、代码熵积累、工具调用可靠性分别怎么治理？
+docs_ai_interview-questions_agent-interview-questions.md:111: - Agent 工程里为什么需要评测器、验证器和任务状态管理？
+docs_ai_interview-questions_agent-interview-questions.md:112: - 一线团队做 Agent 工程化时，共同遇到的难点是什么？
+docs_ai_interview-questions_agent-interview-questions.md:124: - 为什么 AI 系统需要工作流？
+docs_ai_interview-questions_agent-interview-questions.md:125: - Workflow、Graph、Loop 三者是什么关系？
+docs_ai_interview-questions_agent-interview-questions.md:126: - Graph Loop 和 Agent Loop 有什么区别？
+docs_ai_interview-questions_agent-interview-questions.md:127: - 外层 Loop 由谁触发下一轮：CI 事件、定时任务、目标检查还是人工审批？
+docs_ai_interview-questions_agent-interview-questions.md:128: - 外层 Loop 与一次任务内部的 Agent Loop 有什么区别，状态和验证结果怎样交接？
+docs_ai_interview-questions_agent-interview-questions.md:129: - 哪些任务不适合无人值守？缺少可靠验收信号、涉及高风险写操作或需要业务判断时，怎样停止并转人工？
+docs_ai_interview-questions_agent-interview-questions.md:130: - Loop 如何防止死循环？
+docs_ai_interview-questions_agent-interview-questions.md:131: - State 的更新策略怎么选？Replace、Append、Reducer 分别适合什么字段？
+docs_ai_interview-questions_agent-interview-questions.md:132: - 条件边和动态路由有什么区别？
+docs_ai_interview-questions_agent-interview-questions.md:133: - 工具调用失败时，哪些错误适合重试？认证失败和非幂等写操作怎么处理？
+docs_ai_interview-questions_agent-interview-questions.md:134: - 工作流中断后怎么恢复？
+docs_ai_interview-questions_agent-interview-questions.md:135: - 工作流有哪些特有的安全风险？
+docs_ai_interview-questions_agent-interview-questions.md:143: - 如果让 Agent 完成一次需要调用多个工具的长任务，你会如何拆分执行步骤？
+docs_ai_interview-questions_agent-interview-questions.md:144: - 哪些节点适合交给模型判断，哪些节点应该由规则或代码控制？
+docs_ai_interview-questions_agent-interview-questions.md:145: - Agent 的计划、工具结果和中间状态如何保存？中断后怎样恢复？
+docs_ai_interview-questions_agent-interview-questions.md:146: - 工具包含写操作时，权限、参数校验、二次确认和审计怎么设计？
+docs_ai_interview-questions_agent-interview-questions.md:147: - 什么情况下需要 Multi-Agent？如何控制通信成本和状态一致性？
+docs_ai_interview-questions_agent-interview-questions.md:148: - 你会记录哪些 Trace，并用哪些指标评估任务完成率、工具调用和执行轨迹？
+docs_ai_interview-questions_agent-project-interview-guide.md:19: 1. 你做的到底是不是 Agent，为什么不能用普通接口或固定工作流解决？
+docs_ai_interview-questions_agent-project-interview-guide.md:20: 2. 一个请求进来后，经过了哪些组件，状态和数据怎么流转？
+docs_ai_interview-questions_agent-project-interview-guide.md:21: 3. 关键方案是根据什么约束选出来的，代价是什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:22: 4. 项目失败过什么，你怎么定位、修复并防止它再次发生？
+docs_ai_interview-questions_agent-project-interview-guide.md:28: ## Agent 项目面试到底在考什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:55: ## 项目复盘表应该写什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:80: ## 如何用一个案例讲清 Agent 项目？
+docs_ai_interview-questions_agent-project-interview-guide.md:96: ### 30 秒版本怎么说？
+docs_ai_interview-questions_agent-project-interview-guide.md:108: ### 3 分钟版本怎么展开？
+docs_ai_interview-questions_agent-project-interview-guide.md:120: ## 如何从一次请求讲清系统架构？
+docs_ai_interview-questions_agent-project-interview-guide.md:151: ## Agent 项目的技术选型应该回答哪些问题？
+docs_ai_interview-questions_agent-project-interview-guide.md:155: 1. 当时的业务约束是什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:156: 2. 比较过哪些候选方案？
+docs_ai_interview-questions_agent-project-interview-guide.md:157: 3. 为什么当前方案更合适？
+docs_ai_interview-questions_agent-project-interview-guide.md:158: 4. 它牺牲了什么，又如何控制代价？
+docs_ai_interview-questions_agent-project-interview-guide.md:159: 5. 用什么评测或运行数据验证？
+docs_ai_interview-questions_agent-project-interview-guide.md:160: 6. 如果约束变化，什么情况下会换方案？
+docs_ai_interview-questions_agent-project-interview-guide.md:162: ### 为什么用 Agent，而不是普通 Workflow？
+docs_ai_interview-questions_agent-project-interview-guide.md:176: ### 为什么先做单 Agent，而不是直接 Multi-Agent？
+docs_ai_interview-questions_agent-project-interview-guide.md:194: ### RAG、Memory、Context 和 State 怎么区分？
+docs_ai_interview-questions_agent-project-interview-guide.md:202: | RAG     | 售后政策、产品手册、服务网点资料                 | 外部知识里有哪些相关证据？   |
+docs_ai_interview-questions_agent-project-interview-guide.md:203: | Memory  | 用户偏好、经过确认且允许长期保留的信息           | 跨轮次或跨会话需要记住什么？ |
+docs_ai_interview-questions_agent-project-interview-guide.md:204: | Context | 本轮实际发给模型的指令、证据、工具和历史         | 模型这一次能看到什么？       |
+docs_ai_interview-questions_agent-project-interview-guide.md:205: | State   | 当前订单、缺失字段、审批状态、已执行动作、工单号 | 任务现在进行到哪一步？       |
+docs_ai_interview-questions_agent-project-interview-guide.md:215: ### Function Calling、MCP 和 Agent 分别负责什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:227: ### 模型怎么选？
+docs_ai_interview-questions_agent-project-interview-guide.md:241: ### 为什么要引入模型网关？
+docs_ai_interview-questions_agent-project-interview-guide.md:247: ### 哪些是框架能力，哪些是项目自己实现的？
+docs_ai_interview-questions_agent-project-interview-guide.md:255: ## 工具调用为什么不能只看模型输出？
+docs_ai_interview-questions_agent-project-interview-guide.md:285: ## Agent 项目的稳定性如何设计？
+docs_ai_interview-questions_agent-project-interview-guide.md:287: ### 为什么超时不能直接判定为执行失败？
+docs_ai_interview-questions_agent-project-interview-guide.md:312: ### 模型或工具持续不可用时怎么降级？
+docs_ai_interview-questions_agent-project-interview-guide.md:322: ### 如何给 Agent Loop 设置退出边界？
+docs_ai_interview-questions_agent-project-interview-guide.md:332: ### 长任务和人工确认怎样恢复？
+docs_ai_interview-questions_agent-project-interview-guide.md:340: ## Agent 项目的指标应该怎么讲？
+docs_ai_interview-questions_agent-project-interview-guide.md:361: ## Agent 项目的 Badcase 应该怎么复盘？
+docs_ai_interview-questions_agent-project-interview-guide.md:377: ### Agent 为什么会选错相似工具？
+docs_ai_interview-questions_agent-project-interview-guide.md:387: ### 创建工单超时为什么会产生重复记录？
+docs_ai_interview-questions_agent-project-interview-guide.md:399: ## 如何用 Trace 还原 Agent 的执行过程？
+docs_ai_interview-questions_agent-project-interview-guide.md:419: ## 面试前要做哪些准备？
+docs_ai_interview-questions_agent-project-interview-guide.md:436: 1. 去掉大模型后，原流程是什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:437: 2. 为什么是 Agent，不是 RAG 问答或 Workflow？
+docs_ai_interview-questions_agent-project-interview-guide.md:438: 3. 模型、工具、Memory、RAG 和 State 的边界分别是什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:439: 4. 哪些决策由模型做，哪些必须由代码做？
+docs_ai_interview-questions_agent-project-interview-guide.md:440: 5. 写操作如何授权、确认、幂等和核验？
+docs_ai_interview-questions_agent-project-interview-guide.md:441: 6. 如何限制死循环、成本和总时延？
+docs_ai_interview-questions_agent-project-interview-guide.md:442: 7. 指标的公式、样本和基线是什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:443: 8. 最严重的一次失败如何复现？
+docs_ai_interview-questions_agent-project-interview-guide.md:444: 9. 修复后如何证明没有引入新的回归？
+docs_ai_interview-questions_agent-project-interview-guide.md:445: 10. 如果流量扩大十倍，最先出现瓶颈的环节是什么？
+docs_ai_interview-questions_agent-project-interview-guide.md:446: 11. `requestId`、`runId`、`sessionId`、`toolCallId` 和 `actionId` 分别解决什么问题？
+docs_ai_interview-questions_agent-project-interview-guide.md:447: 12. HITL 暂停后如何持久化、过期、恢复并重新校验业务状态？
+docs_ai_interview-questions_agent-project-interview-guide.md:448: 13. RAG、工具结果、MCP Server 和长期 Memory 的信任边界在哪里？
+docs_ai_interview-questions_agent-project-interview-guide.md:449: 14. 哪些能力由框架提供，哪些权限、状态和可靠性机制是项目自己实现的？
+docs_ai_interview-questions_agent-project-interview-guide.md:450: 15. 当前结论哪些来自生产、哪些来自离线实验、哪些只是设计预案？
+docs_ai_interview-questions_ai-interview-guide.md:70: - 项目为什么选择当前模型？更换模型需要比较哪些指标？
+docs_ai_interview-questions_ai-interview-guide.md:71: - RAG 出现召回不到、排序错误或答案不忠实时，分别怎么排查？
+docs_ai_interview-questions_ai-interview-guide.md:72: - Agent 调错工具、参数不合法或写操作超时时，系统如何处理？
+docs_ai_interview-questions_ai-interview-guide.md:73: - 如何证明一次 Prompt、模型或检索配置调整带来了改善？
+docs_ai_interview-questions_ai-interview-guide.md:74: - 模型供应商限流或不可用时，如何排队、降级和切换？
+docs_ai_interview-questions_ai-interview-guide.md:75: - 知识库和工具调用如何做租户隔离、权限校验与审计？
+docs_ai_interview-questions_ai-interview-guide.md:76: - 项目上线后记录了哪些质量、成本、延迟和错误指标？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:27: - Prompt Demo 到生产系统之间有哪些工程差距？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:28: - 如何设计一个生产级 AI 应用的整体架构？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:29: - 一次 AI 请求从接入到返回结果，会经过哪些模块？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:30: - 入口层、编排层、Prompt/Context、RAG/Memory/Tool、模型网关和评测观测分别负责什么？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:31: - 同步返回、流式返回和异步任务分别适合什么场景？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:32: - Prompt 为什么要做版本管理？模板、变量和模型版本应该如何关联？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:33: - RAG、Memory 和 Tool 分别管理什么信息？为什么要分开治理？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:34: - 长任务的中间状态如何保存？服务重启后怎么恢复？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:35: - 为了支持问题回放，一次请求至少要记录哪些数据？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:45: - 为什么生产环境需要 LLM Gateway？业务服务直接调用模型 API 有哪些问题？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:46: - LLM Gateway 和 LLM Router 有什么区别？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:47: - 模型网关通常要承担哪些能力？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:48: - 多个模型供应商的请求参数、响应格式和错误码如何统一？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:49: - 模型路由可以参考哪些信息？如何避免把请求分配给不合适的模型？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:50: - 大模型限流为什么要同时看 RPM、TPM、并发数和租户预算？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:51: - 哪些模型调用错误适合重试？哪些错误应该直接失败？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:52: - 如何设计模型 fallback？哪些任务不能自动降级？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:53: - Token 成本如何归因到租户、用户、功能、模型和 Prompt 版本？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:54: - 模型网关会增加多少延迟？哪些处理适合放在网关中？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:55: - 语义缓存适合哪些请求？如何处理数据时效和权限隔离？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:56: - 如果让你设计一个生产级 LLM Gateway，你会如何拆分模块？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:66: - Tool Calling 的安全边界在哪里？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:67: - 为什么工具 description 和 Prompt 不能替代后端权限校验？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:68: - 高风险工具调用为什么需要二次确认？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:69: - 写操作如何处理幂等、超时和结果不确定的问题？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:70: - Prompt 注入攻击在系统设计层面怎么防？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:71: - RAG 检索如何避免召回当前用户无权查看的内容？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:72: - PII 脱敏应该放在输入、日志、模型调用还是输出环节？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:73: - 工具调用审计日志应该记录哪些字段？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:74: - 模型生成的结构化参数通过 Schema 校验后，为什么还不能直接执行？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:84: - AI 应用的可观测指标应该包括哪些内容？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:85: - 为什么没有评测集就很难判断一次改动是否有效？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:86: - Golden Set 如何覆盖正常路径、边缘场景、对抗样本和高风险失败？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:87: - 离线评测、Trace 回放和线上灰度分别解决什么问题？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:88: - RAG、Agent 和结构化输出为什么不能共用一套评测指标？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:89: - LLM-as-Judge 有哪些偏差？如何用人工抽样和规则校验进行校准？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:90: - CI 中的 AI 评测如何控制成本和运行时间？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:91: - 评测记录为什么要绑定模型、Prompt、检索配置和代码版本？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:92: - 线上质量下降时，如何区分模型、Prompt、检索、工具和数据分布问题？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:93: - AI 应用如何设计灰度、回滚和失败样本回流？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:103: - 如何设计一个实时语音 Agent？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:104: - ASR、LLM、TTS 和 VAD 在语音系统中分别负责什么？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:105: - 实时语音 Agent 的端到端延迟主要来自哪些环节？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:106: - 用户打断时，系统如何取消播放、停止生成并更新上下文？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:107: - `listening`、`thinking`、`speaking`、`interrupted` 等状态如何管理？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:108: - 级联式 ASR + LLM + TTS 和原生 Speech-to-Speech 模型各有什么优缺点？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:109: - 云端 API、本地模型和端云混合方案怎么选？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:110: - 浏览器端音频前处理会影响哪些指标？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:111: - 语音 Agent 的可观测数据应该包括哪些内容？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:115: - 如何设计一个多 Agent 系统，让它支持任务拆分、并行执行、状态共享、冲突处理和失败恢复？参考：[《多 Agent 协作系统设计：任务拆分、状态共享、冲突处理与失败恢复》](../agent/multi-agent.md)
+docs_ai_interview-questions_ai-system-design-interview-questions.md:116: - 如何设计一个带权限控制、引用溯源和知识库更新能力的企业 RAG 系统？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:117: - 如何设计一个支持长任务、工具调用、中断恢复和人工接管的 Agent 平台？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:118: - 智能客服流量突然增加，同时模型供应商开始限流，系统应该如何排队、降级和保护核心请求？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:119: - 模型或 Prompt 升级后，结构化输出成功率和答案质量下降，如何定位并回滚？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:120: - Agent 可以查询订单并发起退款时，权限、参数校验、二次确认、幂等和审计怎么设计？
+docs_ai_interview-questions_ai-system-design-interview-questions.md:121: - 如何设计一个支持实时打断、低延迟和故障降级的语音客服系统？
+docs_ai_interview-questions_llm-interview-questions.md:27: - Token 是什么？为什么中文、英文、代码消耗的 Token 不一样？
+docs_ai_interview-questions_llm-interview-questions.md:28: - 上下文窗口是什么？上下文窗口越大，效果一定越好吗？
+docs_ai_interview-questions_llm-interview-questions.md:29: - 什么是 Lost in the Middle 问题？长上下文场景下怎么缓解？
+docs_ai_interview-questions_llm-interview-questions.md:30: - Temperature、Top-P、Top-K 分别控制什么？生产环境怎么设置更稳？
+docs_ai_interview-questions_llm-interview-questions.md:31: - 为什么 Temperature 设置为 0，模型输出仍然可能不完全一致？
+docs_ai_interview-questions_llm-interview-questions.md:32: - 大模型为什么会产生幻觉？常见缓解方案有哪些？
+docs_ai_interview-questions_llm-interview-questions.md:33: - Token 预算怎么估算？输入、输出、历史消息、RAG 证据如何取舍？
+docs_ai_interview-questions_llm-interview-questions.md:34: - 长上下文窗口会不会取代 RAG？二者分别适合什么场景？
+docs_ai_interview-questions_llm-interview-questions.md:46: - 大模型 API 调用的完整链路是什么？
+docs_ai_interview-questions_llm-interview-questions.md:47: - Streaming 为什么能改善用户体验？它能减少总耗时和 Token 成本吗？
+docs_ai_interview-questions_llm-interview-questions.md:48: - SSE、WebSocket、HTTP Chunked 在流式输出场景下怎么选？
+docs_ai_interview-questions_llm-interview-questions.md:49: - 哪些大模型 API 错误可以重试？哪些错误不能重试？
+docs_ai_interview-questions_llm-interview-questions.md:50: - 为什么大模型调用必须做幂等？
+docs_ai_interview-questions_llm-interview-questions.md:51: - 大模型限流为什么不能只按 QPS 做？
+docs_ai_interview-questions_llm-interview-questions.md:52: - 模型网关通常要承担哪些能力？
+docs_ai_interview-questions_llm-interview-questions.md:53: - AI 应用的调用日志里至少要记录哪些字段？
+docs_ai_interview-questions_llm-interview-questions.md:63: - 为什么只写“请返回 JSON”不可靠？
+docs_ai_interview-questions_llm-interview-questions.md:64: - JSON Mode 和 Structured Outputs 有什么区别？
+docs_ai_interview-questions_llm-interview-questions.md:65: - JSON Schema 在大模型应用里解决什么问题？
+docs_ai_interview-questions_llm-interview-questions.md:66: - Function Calling 的完整链路是什么？
+docs_ai_interview-questions_llm-interview-questions.md:67: - Function Calling 和 MCP 有什么区别？
+docs_ai_interview-questions_llm-interview-questions.md:68: - MCP Tool 和普通 HTTP API 有什么关系？
+docs_ai_interview-questions_llm-interview-questions.md:69: - Agent Skill 和 Function Calling 是一回事吗？
+docs_ai_interview-questions_llm-interview-questions.md:70: - 结构化输出失败后怎么处理？
+docs_ai_interview-questions_llm-interview-questions.md:71: - 工具调用为什么必须做安全治理？
+docs_ai_interview-questions_llm-interview-questions.md:72: - 面试里怎么一句话概括结构化输出？
+docs_ai_interview-questions_llm-interview-questions.md:82: - 为什么不能只靠公开 benchmark 评估 AI 应用质量？
+docs_ai_interview-questions_llm-interview-questions.md:83: - Golden Set 应该怎么构建？冷启动阶段没有生产日志怎么办？
+docs_ai_interview-questions_llm-interview-questions.md:84: - LLM-as-Judge 有哪些主要偏差？怎么缓解？
+docs_ai_interview-questions_llm-interview-questions.md:85: - RAG 评测为什么必须分检索和生成两段？
+docs_ai_interview-questions_llm-interview-questions.md:86: - Agent 评测为什么比普通问答和 RAG 更复杂？
+docs_ai_interview-questions_llm-interview-questions.md:87: - 离线评测、Trace 回放、线上灰度分别解决什么问题？
+docs_ai_interview-questions_llm-interview-questions.md:88: - CI 里的 AI 评测如何平衡速度和覆盖度？
+docs_ai_interview-questions_llm-interview-questions.md:89: - 如果 LLM-as-Judge 和人工评测结果不一致，应该怎么处理？
+docs_ai_interview-questions_llm-interview-questions.md:93: - 客服机器人历史会话持续增长时，如何分配 Token 预算并保留关键业务状态？
+docs_ai_interview-questions_llm-interview-questions.md:94: - 流式响应中途断开后，服务端如何处理重试、续传和重复计费问题？
+docs_ai_interview-questions_llm-interview-questions.md:95: - 上游模型触发 RPM 或 TPM 限制时，模型网关如何排队、降级或切换模型？
+docs_ai_interview-questions_llm-interview-questions.md:96: - 模型生成退款工具的调用参数后，业务系统还需要执行哪些校验？
+docs_ai_interview-questions_llm-interview-questions.md:97: - 更换模型或修改 Prompt 后，如何用离线评测、Trace 回放和线上灰度验证效果？
+docs_ai_interview-questions_rag-interview-questions.md:25: - 什么是 RAG？为什么需要 RAG？
+docs_ai_interview-questions_rag-interview-questions.md:26: - RAG 和传统搜索引擎有什么区别？
+docs_ai_interview-questions_rag-interview-questions.md:27: - RAG 和微调怎么选？什么时候用 RAG，什么时候微调，什么时候两者结合？
+docs_ai_interview-questions_rag-interview-questions.md:28: - RAG 系统中 Embedding 模型怎么选？为什么？
+docs_ai_interview-questions_rag-interview-questions.md:29: - 余弦相似度、内积和欧氏距离有什么区别？
+docs_ai_interview-questions_rag-interview-questions.md:30: - RAG 的幻觉问题怎么解决？RAG 一定不会产生幻觉吗？
+docs_ai_interview-questions_rag-interview-questions.md:31: - 什么是 Lost in the Middle 问题？怎么应对？
+docs_ai_interview-questions_rag-interview-questions.md:32: - 长上下文窗口是否会取代 RAG？
+docs_ai_interview-questions_rag-interview-questions.md:33: - RAG 系统的评估指标有哪些？
+docs_ai_interview-questions_rag-interview-questions.md:34: - RAG 的优势和局限性是什么？
+docs_ai_interview-questions_rag-interview-questions.md:35: - 什么场景适合用 RAG？什么场景不适合？
+docs_ai_interview-questions_rag-interview-questions.md:45: - 什么是 Embedding？为什么需要把文本转成向量？
+docs_ai_interview-questions_rag-interview-questions.md:46: - RAG 场景为什么需要向量数据库？
+docs_ai_interview-questions_rag-interview-questions.md:47: - ANN 算法为什么可以接受不是 100% 精确的结果？
+docs_ai_interview-questions_rag-interview-questions.md:48: - 有哪些向量索引算法？各自优缺点是什么？
+docs_ai_interview-questions_rag-interview-questions.md:49: - Flat、HNSW、IVFFLAT、IVF-PQ 分别适合什么场景？
+docs_ai_interview-questions_rag-interview-questions.md:50: - HNSW 和 IVFFLAT 有什么区别？
+docs_ai_interview-questions_rag-interview-questions.md:51: - HNSW 的 `ef_search` 参数怎么调？调大和调小分别会怎样？
+docs_ai_interview-questions_rag-interview-questions.md:52: - 向量数据库和传统数据库最核心的区别是什么？
+docs_ai_interview-questions_rag-interview-questions.md:53: - 如果向量数据从 100 万增长到 1 亿，架构上需要做什么调整？
+docs_ai_interview-questions_rag-interview-questions.md:54: - 为什么选择 PostgreSQL + pgvector？什么时候应该换专业向量数据库？
+docs_ai_interview-questions_rag-interview-questions.md:64: - RAG 文档处理管线通常包含哪些步骤？
+docs_ai_interview-questions_rag-interview-questions.md:65: - 文档解析、清洗、结构化分别解决什么问题？
+docs_ai_interview-questions_rag-interview-questions.md:66: - Chunk 切分为什么不能只按固定长度切？
+docs_ai_interview-questions_rag-interview-questions.md:67: - Chunk 大小、Overlap、语义边界应该怎么取舍？
+docs_ai_interview-questions_rag-interview-questions.md:68: - 表格、代码块、图片、多模态内容进入 RAG 前怎么处理？
+docs_ai_interview-questions_rag-interview-questions.md:69: - 文档处理阶段如何保留标题层级、页码、来源和权限元数据？
+docs_ai_interview-questions_rag-interview-questions.md:70: - Chunk 质量差会带来哪些召回和生成问题？
+docs_ai_interview-questions_rag-interview-questions.md:71: - 如何从零搭建一套企业级文档处理管线？
+docs_ai_interview-questions_rag-interview-questions.md:81: - RAG 召回率低应该怎么排查？
+docs_ai_interview-questions_rag-interview-questions.md:82: - Chunk 策略、Metadata、Hybrid Search、Query Rewrite、Rerank 分别解决什么问题？
+docs_ai_interview-questions_rag-interview-questions.md:83: - Hybrid Search 是什么？BM25 和向量检索怎么融合？
+docs_ai_interview-questions_rag-interview-questions.md:84: - Query Rewrite、HyDE、Self-Query 分别适合什么场景？
+docs_ai_interview-questions_rag-interview-questions.md:85: - Rerank 解决什么问题？为什么不能只依赖向量相似度排序？
+docs_ai_interview-questions_rag-interview-questions.md:86: - 上下文压缩有什么价值？什么时候会伤害答案质量？
+docs_ai_interview-questions_rag-interview-questions.md:87: - RAG 优化为什么必须先建立失败样本集？
+docs_ai_interview-questions_rag-interview-questions.md:88: - 线上 RAG 出现“答非所问”，应该按什么路径定位？
+docs_ai_interview-questions_rag-interview-questions.md:98: - GraphRAG 解决什么问题？和标准向量 RAG 有什么区别？
+docs_ai_interview-questions_rag-interview-questions.md:99: - 为什么说 Chunk 是信息孤岛？
+docs_ai_interview-questions_rag-interview-questions.md:100: - 向量相似度为什么不擅长多跳推理？
+docs_ai_interview-questions_rag-interview-questions.md:101: - GraphRAG 中实体、关系、社区发现分别是什么？
+docs_ai_interview-questions_rag-interview-questions.md:102: - 全局检索和局部检索有什么区别？
+docs_ai_interview-questions_rag-interview-questions.md:103: - GraphRAG 的社区摘要有什么价值？它的成本在哪里？
+docs_ai_interview-questions_rag-interview-questions.md:104: - GraphRAG 如何做权限过滤？
+docs_ai_interview-questions_rag-interview-questions.md:105: - 什么场景适合 GraphRAG？什么场景不适合？
+docs_ai_interview-questions_rag-interview-questions.md:106: - 成熟系统为什么会组合关键词检索、向量检索、多向量检索和图检索？
+docs_ai_interview-questions_rag-interview-questions.md:116: - RAG 知识库为什么不能只新增不删除？
+docs_ai_interview-questions_rag-interview-questions.md:117: - 增量更新和全量重建怎么选？
+docs_ai_interview-questions_rag-interview-questions.md:118: - Embedding 模型升级后，为什么通常需要重建索引？
+docs_ai_interview-questions_rag-interview-questions.md:119: - Chunk 策略变更会影响哪些历史数据？
+docs_ai_interview-questions_rag-interview-questions.md:120: - 如何避免同一文档多个版本同时被召回？
+docs_ai_interview-questions_rag-interview-questions.md:121: - 知识库更新如何做灰度、回滚和审计？
+docs_ai_interview-questions_rag-interview-questions.md:122: - RAG 评测为什么要分检索质量和生成质量？
+docs_ai_interview-questions_rag-interview-questions.md:123: - MRR、NDCG、Recall@K、Context Precision、Faithfulness 分别衡量什么？
+docs_ai_interview-questions_rag-interview-questions.md:127: - 原始文档已经入库，但相关问题始终召回不到正确 Chunk，你会从哪些环节开始检查？
+docs_ai_interview-questions_rag-interview-questions.md:128: - 正确文档进入了候选池，却总是排在 TopK 之外，应该调整召回还是引入 Rerank？
+docs_ai_interview-questions_rag-interview-questions.md:129: - 检索结果正确，模型仍然引用了错误片段，如何检查上下文顺序、截断和指令约束？
+docs_ai_interview-questions_rag-interview-questions.md:130: - 同一份文档的新旧版本被同时召回，数据和索引更新链路可能出了什么问题？
+docs_ai_interview-questions_rag-interview-questions.md:131: - 只有最终答案好坏的评分时，如何判断问题出在检索还是生成？
+docs_ai_interview-questions_rag-interview-questions.md:132: - 某类问题需要跨多篇文档查关系，如何判断应该优化向量 RAG，还是引入 GraphRAG？
+docs_ai_llm-basis_README.md:47: - 为什么同一个 Prompt 每次输出不一样？
+docs_ai_llm-basis_README.md:48: - 上下文窗口变大是不是就一定更好？
+docs_ai_llm-basis_README.md:49: - 为什么结构化输出会偶发失败？如何做兜底和校验？
+docs_ai_llm-basis_README.md:50: - Function Calling、Tool Calling、MCP 分别解决什么问题？
+docs_ai_llm-basis_README.md:51: - AI 应用上线前如何证明“效果变好了”而不是只凭感觉？
+docs_ai_llm-basis_llm-api-engineering.md:25: ## 一次生产级 LLM 调用包含哪些阶段？
+docs_ai_llm-basis_llm-api-engineering.md:67: ## 同步返回和流式返回有什么区别？
+docs_ai_llm-basis_llm-api-engineering.md:229: ## 哪些错误能重试，哪些不能重试？
+docs_ai_llm-basis_llm-api-engineering.md:306: ## 为什么要限流？如何限流？
+docs_ai_llm-basis_llm-api-engineering.md:432: ## 为什么要结构化返回？
+docs_ai_llm-basis_llm-api-engineering.md:551: ## Java 后端怎么落地 LLM 调用？
+docs_ai_llm-basis_llm-evaluation.md:21: ## 为什么公开 benchmark 不够用？
+docs_ai_llm-basis_llm-evaluation.md:35: ## 一条评测用例里有什么？
+docs_ai_llm-basis_llm-evaluation.md:58: ## Golden Set 怎么构建？
+docs_ai_llm-basis_llm-evaluation.md:64: ### 数据从哪来？
+docs_ai_llm-basis_llm-evaluation.md:92: ### 无法穷举 Case，怎么扩展覆盖？
+docs_ai_llm-basis_llm-evaluation.md:105: ### 多少条够用？
+docs_ai_llm-basis_llm-evaluation.md:170: ## 评测工具怎么选？
+docs_ai_llm-basis_llm-evaluation.md:183: ## LLM-as-Judge 怎么用才可靠？
+docs_ai_llm-basis_llm-evaluation.md:200: - 事实准确性：模型回答与参考答案的事实是否一致？
+docs_ai_llm-basis_llm-evaluation.md:201: - 完整性：参考答案中的关键信息是否都在模型回答中体现？
+docs_ai_llm-basis_llm-evaluation.md:202: - 措辞清晰度：模型回答是否清楚易懂？
+docs_ai_llm-basis_llm-evaluation.md:237: ### Judge Prompt 怎么写？
+docs_ai_llm-basis_llm-evaluation.md:294: ## RAG 应用怎么评测？
+docs_ai_llm-basis_llm-evaluation.md:409: ## Agent 应用怎么评测？
+docs_ai_llm-basis_llm-evaluation.md:539: ### 时间和外部环境一直变化，怎么评？
+docs_ai_llm-basis_llm-evaluation.md:564: ### Skill 怎么单独评？
+docs_ai_llm-basis_llm-evaluation.md:579: ## 评测 Harness 怎么搭？
+docs_ai_llm-basis_llm-evaluation.md:616: ## 结构化输出怎么评测？
+docs_ai_llm-basis_llm-evaluation.md:622: 1. **格式合法率**：输出是不是合法 JSON？用 `JSON.parse()` 就能检测，不需要人工。
+docs_ai_llm-basis_llm-evaluation.md:623: 2. **Schema 通过率**：合法 JSON 里，有多少通过了你定义的 JSON Schema 校验？它主要检查字段完整性、类型、枚举范围。
+docs_ai_llm-basis_llm-evaluation.md:799: ### 阈值怎么定？
+docs_ai_llm-basis_llm-evaluation.md:807: ### 速度和覆盖度怎么平衡？
+docs_ai_llm-basis_llm-evaluation.md:872: ### 1. 为什么不能只靠公开 benchmark 评估 AI 应用质量？
+docs_ai_llm-basis_llm-evaluation.md:876: ### 2. Golden Set 应该怎么构建？
+docs_ai_llm-basis_llm-evaluation.md:880: ### 3. LLM-as-Judge 有哪些主要偏差，怎么缓解？
+docs_ai_llm-basis_llm-evaluation.md:884: ### 4. RAG 评测为什么必须分检索和生成两段？
+docs_ai_llm-basis_llm-evaluation.md:888: ### 5. Agent 评测为什么比 RAG 更复杂？
+docs_ai_llm-basis_llm-evaluation.md:892: ### 6. 离线评测、Trace 回放、线上灰度分别解决什么问题？
+docs_ai_llm-basis_llm-evaluation.md:896: ### 7. CI 里的评测如何平衡速度和覆盖度？
+docs_ai_llm-basis_llm-evaluation.md:900: ### 8. 如果 LLM-as-Judge 和人工评测结果不一致怎么办？
+docs_ai_llm-basis_llm-evaluation.md:906: ### 9. Agent eval 里的 task、trial、grader、transcript 分别是什么？
+docs_ai_llm-basis_llm-evaluation.md:910: ### 10. Skill 应该怎么单独评测？
+docs_ai_llm-basis_llm-evaluation.md:921: ### 11. 评测 Harness 在 AI 应用里负责什么？
+docs_ai_llm-basis_llm-evaluation.md:925: ### 12. 时间和 Web Search 结果一直变化，怎么评？
+docs_ai_llm-basis_llm-evaluation.md:931: ### 13. 出现 Badcase 后，怎么区分模型、第三方系统、架构和代码问题？
+docs_ai_llm-basis_llm-operation-mechanism.md:16: ## Token 和上下文为什么决定成本与效果？
+docs_ai_llm-basis_llm-operation-mechanism.md:167: ## 采样参数如何影响输出稳定性？
+docs_ai_llm-basis_llm-operation-mechanism.md:279: | Frequency Penalty  | Token 出现次数越多扣分越重          | “同一个词说了三遍？重罚” |
+docs_ai_llm-basis_structured-output-function-calling.md:19: ## 为什么“请返回 JSON”不可靠？
+docs_ai_llm-basis_structured-output-function-calling.md:46: - `reason` 可以为空吗？最大长度是多少？
+docs_ai_llm-basis_structured-output-function-calling.md:47: - 如果用户输入缺少信息，应该返回 `NEED_MORE_INFO`，还是继续猜？
+docs_ai_llm-basis_structured-output-function-calling.md:129: ## 怎样把 JSON 从格式要求变成工程契约？
+docs_ai_llm-basis_structured-output-function-calling.md:139: ### JSON Mode 只能保证什么？
+docs_ai_llm-basis_structured-output-function-calling.md:162: ### JSON Schema 负责定义什么？
+docs_ai_llm-basis_structured-output-function-calling.md:206: ### Structured Outputs 能前移哪些约束？
+docs_ai_llm-basis_structured-output-function-calling.md:284: ## Function Calling 到底调用了什么？
+docs_ai_llm-basis_structured-output-function-calling.md:308: ### 为什么需要工具调用意图？
+docs_ai_llm-basis_structured-output-function-calling.md:332: ## Function Calling、MCP Tool、HTTP API、Agent Skill 是什么关系？
+docs_ai_llm-basis_structured-output-function-calling.md:346: ### Function Calling 如何映射到 HTTP API？
+docs_ai_llm-basis_structured-output-function-calling.md:374: ### MCP Tool 解决的是哪一层标准化？
+docs_ai_llm-basis_structured-output-function-calling.md:386: ### Agent Skill 为什么不是 Function Calling 的语法糖？
+docs_ai_llm-basis_structured-output-function-calling.md:401: ## 什么时候该用 Structured Outputs，什么时候该上工具？
+docs_ai_llm-basis_structured-output-function-calling.md:422: ## 结构化输出怎么工程化落地？
+docs_ai_llm-basis_structured-output-function-calling.md:630: ## 工具调用安全怎么保证？
+docs_ai_llm-basis_structured-output-function-calling.md:955: ## 上线前应该检查哪些工程细节？
+docs_ai_llm-basis_structured-output-function-calling.md:961: - 一个字段是否只承载一个业务含义？
+docs_ai_llm-basis_structured-output-function-calling.md:962: - “信息不足”“无需操作”等状态是否有明确枚举？
+docs_ai_llm-basis_structured-output-function-calling.md:963: - `required`、`additionalProperties` 和字段说明是否把输入边界写清？
+docs_ai_llm-basis_structured-output-function-calling.md:964: - 多个消费者共用时，是否通过 `schemaVersion` 区分版本？
+docs_ai_llm-basis_structured-output-function-calling.md:968: - 是否使用供应商原生 Structured Outputs 或严格工具调用能力？
+docs_ai_llm-basis_structured-output-function-calling.md:969: - 是否控制输出长度，避免 JSON 被截断？
+docs_ai_llm-basis_structured-output-function-calling.md:970: - 是否避免在结构化输出任务里使用过高的采样随机性？
+docs_ai_llm-basis_structured-output-function-calling.md:971: - 是否为校验失败设计重试 Prompt？
+docs_ai_llm-basis_structured-output-function-calling.md:975: - 是否做 Schema 校验？
+docs_ai_llm-basis_structured-output-function-calling.md:976: - 是否做业务校验和权限校验？
+docs_ai_llm-basis_structured-output-function-calling.md:977: - 写操作是否幂等？
+docs_ai_llm-basis_structured-output-function-calling.md:978: - 高风险操作是否二次确认？
+docs_ai_llm-basis_structured-output-function-calling.md:979: - 工具超时后是否短路？
+docs_ai_llm-basis_structured-output-function-calling.md:980: - 是否有审计日志和 traceId？
+docs_ai_llm-basis_structured-output-function-calling.md:984: - 解析失败是否进入人工队列或规则兜底？
+docs_ai_llm-basis_structured-output-function-calling.md:985: - 工具失败时是否禁止模型编造结果？
+docs_ai_llm-basis_structured-output-function-calling.md:986: - 是否统计失败率、错误类型和高频非法枚举？
+docs_ai_llm-basis_structured-output-function-calling.md:987: - 是否能根据失败样本反推 Schema 和 Prompt 的改进点？
+docs_ai_rag_README.md:49: - RAG 为什么还会幻觉？应该从哪些环节排查？
+docs_ai_rag_README.md:50: - Chunk 切大还是切小？如何处理标题、表格、代码块和多模态内容？
+docs_ai_rag_README.md:51: - 向量检索、关键词检索、混合检索分别适合什么场景？
+docs_ai_rag_README.md:52: - Rerank 的作用是什么？什么时候值得引入？
+docs_ai_rag_README.md:53: - GraphRAG 和普通 RAG 有什么区别？
+docs_ai_rag_README.md:54: - 知识库更新如何保证一致性、可回滚和不停机？
+docs_ai_rag_README.md:55: - RAG 应用如何评测召回质量和最终回答质量？
+docs_ai_rag_graphrag.md:15: ## 什么是 RAG？
+docs_ai_rag_graphrag.md:25: ## 什么是 GraphRAG？
+docs_ai_rag_graphrag.md:44: ## 传统向量 RAG 有什么局限性？
+docs_ai_rag_graphrag.md:50: - “退款流程是什么？”
+docs_ai_rag_graphrag.md:51: - “某个 API 的限流规则是多少？”
+docs_ai_rag_graphrag.md:52: - “Spring AI 里怎么配置向量数据库？”
+docs_ai_rag_graphrag.md:78: - “这批客户投诉主要集中在哪几类问题？”
+docs_ai_rag_graphrag.md:79: - “过去一年公司知识库里反复出现的架构风险是什么？”
+docs_ai_rag_graphrag.md:80: - “这几份报告背后共同指向的战略主题是什么？”
+docs_ai_rag_graphrag.md:210: - “订单中心依赖哪些服务？”
+docs_ai_rag_graphrag.md:211: - “某个供应商影响了哪些项目？”
+docs_ai_rag_graphrag.md:212: - “某个故障的上下游链路是什么？”
+docs_ai_rag_graphrag.md:218: - “这批报告里反复出现的风险主题是什么？”
+docs_ai_rag_graphrag.md:219: - “客服投诉主要聚成哪几类？”
+docs_ai_rag_graphrag.md:220: - “研发文档里最常见的架构瓶颈是什么？”
+docs_ai_rag_graphrag.md:264: | 局部事实 | 向量检索或局部图检索 | “某个接口的超时时间是多少？”             |
+docs_ai_rag_graphrag.md:265: | 实体关系 | 局部图检索           | “订单中心依赖哪些服务？”                 |
+docs_ai_rag_graphrag.md:266: | 多跳推理 | 图遍历 + 向量补证据  | “某负责人参与过哪些影响支付链路的事故？” |
+docs_ai_rag_graphrag.md:267: | 全局归纳 | 社区摘要 + 全局检索  | “这批报告的主要风险主题是什么？”         |
+docs_ai_rag_graphrag.md:268: | 精确过滤 | 图查询或结构化查询   | “2025 年 Q4 哪些项目依赖供应商 A？”      |
+docs_ai_rag_graphrag.md:276: ## GraphRAG 适合什么场景？不适合什么场景？
+docs_ai_rag_graphrag.md:282: - **企业知识库的复杂问答**：问题需要跨部门、跨制度、跨项目复盘串联信息，比如“这个流程涉及哪些部门？每个部门承担什么职责？”“某条制度和哪些历史制度冲突？”。
+docs_ai_rag_graphrag.md:283: - **IT 架构和故障影响分析**：服务、接口、数据库、消息队列、负责人、告警、事故之间天然有依赖关系，比如“Redis 集群异常会影响哪些核心接口？”“哪些系统同时依赖一个高风险组件？”。
+docs_ai_rag_graphrag.md:296: ## Neo4j GraphRAG 适合解决什么问题？
+docs_ai_rag_graphrag.md:319: ## 还有哪些 GraphRAG 相关实现？
+docs_ai_rag_graphrag.md:413: - 用户能看某个节点，但能不能看它的邻居？
+docs_ai_rag_graphrag.md:414: - 用户能看某条边，但能不能看边连接的另一个实体？
+docs_ai_rag_graphrag.md:415: - 社区摘要里是否混入了无权限文档的信息？
+docs_ai_rag_graphrag.md:416: - 全局摘要会不会泄露敏感主题？
+docs_ai_rag_graphrag.md:424: ## 你会如何在项目中落地 GraphRAG?
+docs_ai_rag_graphrag.md:519: ## GraphRAG 评测怎么落地？
+docs_ai_rag_graphrag.md:567: - [Neo4j：What Is GraphRAG?](https://neo4j.com/blog/genai/what-is-graphrag/)
+docs_ai_rag_rag-basis.md:15: ## 什么是 RAG？
+docs_ai_rag_rag-basis.md:21: ## 为什么需要 RAG？
+docs_ai_rag_rag-basis.md:31: ## RAG 的常见用途有哪些？
+docs_ai_rag_rag-basis.md:41: ## 为什么有些企业还是宁愿用传统搜索而不是 RAG？
+docs_ai_rag_rag-basis.md:61: ## RAG 工作原理了解吗？
+docs_ai_rag_rag-basis.md:88: ## Embedding 是什么？
+docs_ai_rag_rag-basis.md:94: - “如何申请退款？”
+docs_ai_rag_rag-basis.md:95: - “退款流程是什么？”
+docs_ai_rag_rag-basis.md:96: - “订单怎么取消并退钱？”
+docs_ai_rag_rag-basis.md:113: ## 向量相似度怎么计算？
+docs_ai_rag_rag-basis.md:125: ## RAG 与传统搜索引擎的区别是什么？
+docs_ai_rag_rag-basis.md:137: ## RAG 和微调怎么选？
+docs_ai_rag_rag-basis.md:154: ## 长上下文窗口会取代 RAG 吗？
+docs_ai_rag_rag-basis.md:167: ## RAG 有哪些演进阶段？
+docs_ai_rag_rag-basis.md:181: ## RAG 的工程局限有哪些？
+docs_ai_rag_rag-basis.md:207: - 什么是 RAG？它主要解决大模型的哪些局限？
+docs_ai_rag_rag-basis.md:208: - RAG 和传统搜索引擎有什么区别？什么场景下没必要上 RAG？
+docs_ai_rag_rag-basis.md:209: - RAG 和微调怎么选？什么情况下需要将两者结合？
+docs_ai_rag_rag-basis.md:210: - RAG 系统中如何选择 Embedding 模型？为什么不能只看 MTEB 榜单？
+docs_ai_rag_rag-basis.md:211: - 余弦相似度、内积和欧氏距离有什么区别？向量归一化后它们有什么关系？
+docs_ai_rag_rag-basis.md:212: - 为什么加了 RAG 还是会产生幻觉？应该从哪些环节排查和缓解？
+docs_ai_rag_rag-basis.md:213: - 什么是 Lost in the Middle 问题？为什么长上下文窗口不能完全取代 RAG？
+docs_ai_rag_rag-basis.md:214: - Naive RAG、Advanced RAG 和 Modular RAG 的核心差异是什么？
+docs_ai_rag_rag-document-processing.md:15: ## 文档从上传到入库要经过哪些环节？
+docs_ai_rag_rag-document-processing.md:37: ## 如何选择合适的 Chunking 策略？
+docs_ai_rag_rag-document-processing.md:114: ## 什么是语义丢失，为什么会发生？
+docs_ai_rag_rag-document-processing.md:138: ## 如何处理结构丢失问题？
+docs_ai_rag_rag-document-processing.md:218: ## 如何设计分层校验策略？
+docs_ai_rag_rag-document-processing.md:325: ## 如何处理多模态内容？
+docs_ai_rag_rag-document-processing.md:427: ## 如何从零搭建文档处理管线？
+docs_ai_rag_rag-evaluation.md:15: ## 什么是 RAG 评测？
+docs_ai_rag_rag-evaluation.md:27: | 检索结果 | 回答需要的证据有没有找到？       | 是否同时找到“20 MB”和“7 天”            |
+docs_ai_rag_rag-evaluation.md:28: | 生成回答 | 答案是否正确、完整、有依据？     | 有没有把专业版的 100 MB 当成标准版上限 |
+docs_ai_rag_rag-evaluation.md:29: | 执行过程 | 请求有没有完成，代价是否可接受？ | 是否超时、总耗时和 Token 用量是多少    |
+docs_ai_rag_rag-evaluation.md:35: ## 为什么需要 RAG 评测？
+docs_ai_rag_rag-evaluation.md:51: ## 如何准备评测集？
+docs_ai_rag_rag-evaluation.md:100: ## 检索质量怎么评？
+docs_ai_rag_rag-evaluation.md:126: ## 生成回答怎么评？
+docs_ai_rag_rag-evaluation.md:157: ## 执行失败应该怎么算？
+docs_ai_rag_rag-evaluation.md:173: ## 如何运行一次离线评测？
+docs_ai_rag_rag-evaluation.md:194: ## 如何判断一次优化有效？
+docs_ai_rag_rag-evaluation.md:210: ## 上线后还需要观察什么？
+docs_ai_rag_rag-knowledge-update.md:19: ## 知识库更新要解决哪些问题？
+docs_ai_rag_rag-knowledge-update.md:35: ## 为什么 Embedding 模型必须保持一致？
+docs_ai_rag_rag-knowledge-update.md:67: ## 如何设计支持更新的元数据体系？
+docs_ai_rag_rag-knowledge-update.md:112: ## 新增、修改、删除文档如何同步？
+docs_ai_rag_rag-knowledge-update.md:195: ## 增量更新和全量重建各适合什么场景？
+docs_ai_rag_rag-knowledge-update.md:209: ### 增量更新适合什么场景？
+docs_ai_rag_rag-knowledge-update.md:221: ### 全量重建适合什么场景？
+docs_ai_rag_rag-knowledge-update.md:271: ## 如何让更新链路稳定可靠？
+docs_ai_rag_rag-knowledge-update.md:481: ## 知识库更新有哪些常见坑？
+docs_ai_rag_rag-knowledge-update.md:519: ## 如何保证知识库更新的可观测性？
+docs_ai_rag_rag-optimization.md:15: ## RAG 优化到底在优化什么？
+docs_ai_rag_rag-optimization.md:188: ### Hybrid Search 适合哪些查询？
+docs_ai_rag_rag-optimization.md:236: - “这个报错咋整？”
+docs_ai_rag_rag-optimization.md:237: - “钱能退吗？”
+docs_ai_rag_rag-optimization.md:238: - “线上那个限流问题是不是又来了？”
+docs_ai_rag_rag-optimization.md:297: ### 为什么 Rerank 有用？
+docs_ai_rag_rag-optimization.md:314: ### Rerank 放在哪里？
+docs_ai_rag_rag-optimization.md:320: ### LLM Rerank 和专用 Reranker 怎么选？
+docs_ai_rag_rag-vector-store.md:15: ## Embedding 和向量检索是什么关系？
+docs_ai_rag_rag-vector-store.md:32: ## RAG 场景为什么需要向量数据库？
+docs_ai_rag_rag-vector-store.md:71: ### 语义检索和关键词检索有什么不同？
+docs_ai_rag_rag-vector-store.md:89: ## 向量相似度和距离度量怎么选？
+docs_ai_rag_rag-vector-store.md:107: ## 什么是向量索引算法？
+docs_ai_rag_rag-vector-store.md:142: ## 有哪些向量索引算法？
+docs_ai_rag_rag-vector-store.md:165: ## 你的项目使用的什么向量索引算法？
+docs_ai_rag_rag-vector-store.md:228: ## HNSW 索引和 IVFFLAT 索引有什么区别？
+docs_ai_rag_rag-vector-store.md:249: ## 有哪些向量数据库？
+docs_ai_rag_rag-vector-store.md:287: ## 向量数据库怎么选？
+docs_ai_rag_rag-vector-store.md:328: ## 你为什么选择 PostgreSQL + pgvector？
+docs_ai_rag_rag-vector-store.md:366: ## pgvector 实践细节有哪些？
+docs_ai_rag_rag-vector-store.md:410: ## 为什么不选择 MySQL 搭配向量数据库？
+docs_ai_rag_rag-vector-store.md:445: - 什么是 Embedding？为什么需要把文本转成向量？
+docs_ai_rag_rag-vector-store.md:446: - RAG 场景为什么需要向量数据库？
+docs_ai_rag_rag-vector-store.md:447: - 余弦相似度和欧氏距离有什么区别？RAG 场景下用哪个？
+docs_ai_rag_rag-vector-store.md:448: - ANN 算法为什么可以接受不是 100% 精确的结果？
+docs_ai_rag_rag-vector-store.md:449: - 有哪些向量索引算法？各自优缺点是什么？
+docs_ai_rag_rag-vector-store.md:450: - HNSW 和 IVFFLAT 有什么区别？
+docs_ai_rag_rag-vector-store.md:451: - HNSW 的 `ef_search` 参数怎么调？调大和调小分别会怎样？
+docs_ai_rag_rag-vector-store.md:452: - 向量数据库和传统数据库最核心的区别是什么？
+docs_ai_rag_rag-vector-store.md:453: - 如果向量数据从 100 万增长到 1 亿，架构上需要做什么调整？
+docs_ai_rag_rag-vector-store.md:454: - pgvector 的 HNSW 索引在什么情况下会失效或退化为更慢的扫描？
+docs_ai_rag_rag-vector-store.md:455: - 为什么选择 PostgreSQL + pgvector？
+docs_ai_system-design_README.md:51: - Prompt Demo 上线前还缺哪些工程能力？
+docs_ai_system-design_README.md:52: - Agent 读取外部文档并调用写工具时，如何防止注入、越权和数据外传？
+docs_ai_system-design_README.md:53: - AI 应用为什么常把模型调用收敛到网关层？
+docs_ai_system-design_README.md:54: - 多模型路由、fallback、限流和缓存分别解决什么问题？
+docs_ai_system-design_README.md:55: - 一次 Agent 请求应该怎样拆 Span，跨线程和跨服务时如何保持 Trace？
+docs_ai_system-design_README.md:56: - 线上失败 Trace 如何回流到评测集和回归检查？
+docs_ai_system-design_README.md:57: - 实时语音 Agent 的延迟、打断和端云选型为什么更难处理？
+docs_ai_system-design_ai-application-architecture.md:109: - 这次是普通问答、RAG 问答、Agent 多步任务，还是批处理任务？
+docs_ai_system-design_ai-application-architecture.md:110: - 需要哪些上下文：历史会话、用户画像、知识库、实时业务数据？
+docs_ai_system-design_ai-application-architecture.md:111: - 是否允许调用工具？哪些工具需要二次确认？
+docs_ai_system-design_ai-application-architecture.md:112: - 应该走同步、流式，还是异步？
+docs_ai_system-design_ai-application-architecture.md:113: - 输出要不要进入评测、人工审核或后处理？
+docs_ai_system-design_ai-observability.md:27: ## 为什么 AI 应用不能只看接口是否成功？
+docs_ai_system-design_ai-observability.md:39: ## Metrics、Logs、Trace、Evaluation 和 Audit 有什么区别？
+docs_ai_system-design_ai-observability.md:47: | Metrics    | 系统整体是否异常？             | 请求量、错误率、P95 延迟、Token 用量、工具失败率 |
+docs_ai_system-design_ai-observability.md:48: | Logs       | 某个时间点发生了什么事件？     | 异常堆栈、状态变更、重试原因、业务告警           |
+docs_ai_system-design_ai-observability.md:49: | Trace      | 一次请求经历了什么？           | 模型调用、检索、工具调用、Agent 执行和上下游关系 |
+docs_ai_system-design_ai-observability.md:50: | Evaluation | 输出质量是否合格？             | 正确性、忠实度、工具选择、任务完成度、安全性     |
+docs_ai_system-design_ai-observability.md:51: | Audit      | 谁在什么权限下执行了什么操作？ | 用户身份、审批记录、权限决策、外部写操作         |
+docs_ai_system-design_ai-observability.md:61: ## Trace、Span、Session、Run 和 Attempt 怎么区分？
+docs_ai_system-design_ai-observability.md:91: ## 一次 Agent 请求应该怎样拆 Span？
+docs_ai_system-design_ai-observability.md:127: ### 父子关系应该怎么设计？
+docs_ai_system-design_ai-observability.md:142: ### Span 名称应该怎么定？
+docs_ai_system-design_ai-observability.md:164: ### OpenTelemetry 已经统一了 Agent Span 吗？
+docs_ai_system-design_ai-observability.md:172: ## 一条 Trace 应该记录哪些信息？
+docs_ai_system-design_ai-observability.md:241: ## 低基数和高基数字段应该怎么区分？
+docs_ai_system-design_ai-observability.md:270: ## AI 应用应该重点监控哪些指标？
+docs_ai_system-design_ai-observability.md:316: ## 如何用 Trace 定位常见的 AI Badcase？
+docs_ai_system-design_ai-observability.md:320: ### RAG 返回了错误答案，应该先看哪里？
+docs_ai_system-design_ai-observability.md:333: ### 退款工具为什么执行了两次？
+docs_ai_system-design_ai-observability.md:345: ### 多 Agent 汇总为什么漏了一份结果？
+docs_ai_system-design_ai-observability.md:358: ## 多 Agent、异步任务和消息队列如何保持 Trace？
+docs_ai_system-design_ai-observability.md:364: ### 跨服务如何传播？
+docs_ai_system-design_ai-observability.md:372: ### 切换线程为什么会断链？
+docs_ai_system-design_ai-observability.md:392: ### 流式调用是否一定能自动关联？
+docs_ai_system-design_ai-observability.md:400: ### 一个任务跨多条 Trace 怎么关联？
+docs_ai_system-design_ai-observability.md:414: ## Trace 里能保存完整 Prompt 和工具结果吗？
+docs_ai_system-design_ai-observability.md:439: ## Trace 采样应该怎么设计？
+docs_ai_system-design_ai-observability.md:443: ### 头部采样和尾部采样有什么区别？
+docs_ai_system-design_ai-observability.md:460: ### 比较实用的组合策略是什么？
+docs_ai_system-design_ai-observability.md:476: ## 线上 Trace 如何回流到评测体系？
+docs_ai_system-design_ai-observability.md:506: ## Java/Spring AI 项目如何接入可观测性？
+docs_ai_system-design_ai-observability.md:512: ### 如何打通 Spring AI 自带的 Trace？
+docs_ai_system-design_ai-observability.md:553: ### 哪些 Span 需要自己补？
+docs_ai_system-design_ai-observability.md:620: ### 如何验证接入结果？
+docs_ai_system-design_ai-observability.md:645: ## AI 可观测性平台应该怎么选？
+docs_ai_system-design_ai-observability.md:676: ## 落地 AI 可观测性时最容易犯哪些错误？
+docs_ai_system-design_ai-observability.md:706: ## 面试中如何回答 AI 可观测性相关问题？
+docs_ai_system-design_ai-observability.md:708: ### AI 可观测性和传统可观测性最大的区别是什么？
+docs_ai_system-design_ai-observability.md:712: ### 为什么只有 Metrics 和日志还不够？
+docs_ai_system-design_ai-observability.md:716: ### Agent Trace 应该如何拆 Span？
+docs_ai_system-design_ai-observability.md:720: ### 如何定位一次 RAG 错误回答？
+docs_ai_system-design_ai-observability.md:724: ### 多 Agent 并行执行时如何保持调用链？
+docs_ai_system-design_ai-observability.md:728: ### Prompt 和模型回答应该全部写入 Trace 吗？
+docs_ai_system-design_ai-observability.md:732: ### 头部采样和尾部采样怎么选？
+docs_ai_system-design_ai-observability.md:736: ### Trace 和 Evaluation 是什么关系？
+docs_ai_system-design_ai-observability.md:763: - [OpenTelemetry Collector：Tail Sampling Processor](https://explorer.opentelemetry.io/collector/components/contrib-tailsamplingprocessor?type=processor)
+docs_ai_system-design_ai-voice.md:35: ## AI 语音系统到底解决了什么问题？
+docs_ai_system-design_ai-voice.md:53: ## 语音识别（ASR）是怎么把声音变成文字的？
+docs_ai_system-design_ai-voice.md:107: ## 语音合成（TTS）是怎么把文字变成声音的？
+docs_ai_system-design_ai-voice.md:157: ## VAD 如何控制对话轮次？
+docs_ai_system-design_ai-voice.md:163: - 用户开始说话了吗？
+docs_ai_system-design_ai-voice.md:164: - 用户说完了吗？
+docs_ai_system-design_ai-voice.md:209: ## 一次完整的语音对话是怎么跑起来的？
+docs_ai_system-design_ai-voice.md:237: ## 实时语音为什么比文字对话难这么多？
+docs_ai_system-design_ai-voice.md:394: ## 从 interview-guide 看基础版语音 Agent 是怎么实现的？
+docs_ai_system-design_ai-voice.md:719: ## 怎么让语音 Agent 支持打断？
+docs_ai_system-design_ai-voice.md:767: ## 浏览器音频捕获与前处理在语音系统中扮演什么角色？
+docs_ai_system-design_ai-voice.md:852: ## 级联链路和原生实时模型各有什么优劣？
+docs_ai_system-design_ai-voice.md:915: ## 怎么在生产环境中优化语音系统？
+docs_ai_system-design_ai-voice.md:999: ## 语音 Agent 还能怎么演进？
+docs_ai_system-design_ai-voice.md:1067: ## 面试里怎么回答 AI 语音系统问题？
+docs_ai_system-design_llm-gateway.md:23: ### LLM Gateway 到底是什么？
+docs_ai_system-design_llm-gateway.md:43: ### 为什么需要 LLM Gateway？
+docs_ai_system-design_llm-gateway.md:76: ### LLM Gateway 和 LLM Router 有什么区别？
+docs_ai_system-design_llm-gateway.md:100: ### LLM Gateway 和 RAG、Agent、MCP 是什么关系？
+docs_ai_system-design_llm-gateway.md:114: ### LLM Gateway 会不会增加延迟？
+docs_ai_system-design_llm-gateway.md:124: ### 你真的需要 LLM Gateway 吗？
+docs_ai_system-design_llm-gateway.md:140: ## 为什么不能所有请求都用最强模型？
+docs_ai_system-design_llm-gateway.md:150: ### 什么任务适合小模型？什么任务必须上强模型？
+docs_ai_system-design_llm-gateway.md:160: ### LLM Router 如何选择模型？
+docs_ai_system-design_llm-gateway.md:191: ## LLM Gateway 需要具备哪些能力？
+docs_ai_system-design_llm-gateway.md:538: ## 如何让你设计一个 LLM Gateway，你会怎么做？
+docs_ai_system-design_llm-gateway.md:540: ### 一个生产级 LLM Gateway 长什么样？
+docs_ai_system-design_llm-gateway.md:561: ### 请求进来后，Gateway 内部怎么跑？
+docs_ai_system-design_llm-gateway.md:571: ### 路由策略怎么从简单演进到智能？
+docs_ai_system-design_llm-gateway.md:588: ### 路由错了怎么办？
+docs_ai_system-design_llm-gateway.md:624: ## 主流方案怎么选？
+docs_ai_system-design_llm-gateway.md:626: ### 自研、LiteLLM、Cloudflare AI Gateway、Kong AI Gateway、Inworld Router 怎么选？
+docs_ai_system-design_llm-gateway.md:673: ## 怎么衡量 LLM Gateway 做得好不好？
+docs_ai_system-design_llm-security.md:37: ## Agent 为什么扩大了 LLM 的安全风险？
+docs_ai_system-design_llm-security.md:94: ## Prompt Injection、间接注入和 Jailbreak 有什么区别？
+docs_ai_system-design_llm-security.md:112: ### 为什么在 System Prompt 里写“不要听外部指令”还不够？
+docs_ai_system-design_llm-security.md:140: ## 外部内容怎样进入上下文才更安全？
+docs_ai_system-design_llm-security.md:201: ## 模型输出必须经过哪些校验？
+docs_ai_system-design_llm-security.md:237: ## 怎样控制 Agent 的工具权限？
+docs_ai_system-design_llm-security.md:303: ## MCP 授权需要注意什么？
+docs_ai_system-design_llm-security.md:362: ## 重试、幂等和结果不确定怎样处理？
+docs_ai_system-design_llm-security.md:398: ## 代码和浏览器工具怎样隔离？
+docs_ai_system-design_llm-security.md:433: ## 敏感数据、日志和 Trace 怎么处理？
+docs_ai_system-design_llm-security.md:467: ## MCP、Skills 和模型供应链怎么治理？
+docs_ai_system-design_llm-security.md:484: ## Java 后端如何实现安全工具执行链？
+docs_ai_system-design_llm-security.md:631: ### 4. 在 Spring AI 中把安全层放在哪里？
+docs_ai_system-design_llm-security.md:642: ## 安全测试应该覆盖哪些 Badcase？
+docs_ai_system-design_llm-security.md:694: ## 发生安全事件后怎么处理？
+docs_ai_system-design_llm-security.md:710: ## 面试中怎么回答 Agent 安全设计？
+docs_ai_system-design_llm-security.md:712: ### 1. Prompt Injection 应该怎么防？
+docs_ai_system-design_llm-security.md:716: ### 2. 为什么 Function Calling 有 Schema 仍然不安全？
+docs_ai_system-design_llm-security.md:720: ### 3. Agent 可以退款时，完整执行链是什么？
+docs_ai_system-design_llm-security.md:724: ### 4. MCP 使用 OAuth 后是否就安全了？
+docs_ai_system-design_llm-security.md:728: ### 5. Docker 能否完全解决代码执行风险？
+docs_ai_system-design_llm-security.md:732: ### 6. Agent Trace 为什么也有安全风险？
+docs_ai_system-design_llm-security.md:740: - 外部网页、邮件、RAG、Memory 和工具结果是否统一标记为不可信内容？
+docs_ai_system-design_llm-security.md:741: - RAG 是否在召回前按租户和 ACL 过滤？
+docs_ai_system-design_llm-security.md:742: - Memory 写入是否校验来源、用途、租户、用户和过期时间？
+docs_ai_system-design_llm-security.md:743: - 是否保留来源、版本、权限和内容 Hash？
+docs_ai_system-design_llm-security.md:744: - 多模态、HTML、OCR 和编码内容是否进入对抗测试？
+docs_ai_system-design_llm-security.md:748: - 工具是否按具体业务动作拆分，避免任意 SQL、Shell 和 URL？
+docs_ai_system-design_llm-security.md:749: - 身份、租户和角色是否只来自服务端认证上下文？
+docs_ai_system-design_llm-security.md:750: - 是否同时做 Schema、业务语义、资源权限和风险策略校验？
+docs_ai_system-design_llm-security.md:751: - 高风险确认是否绑定具体参数、用户、请求和有效期？
+docs_ai_system-design_llm-security.md:752: - 写操作是否有幂等、结果查询、对账和补偿？
+docs_ai_system-design_llm-security.md:756: - MCP Server、Skill、模型、镜像和依赖是否固定版本并记录来源？
+docs_ai_system-design_llm-security.md:757: - 是否审查启动命令、依赖安装脚本、工具描述和权限申请？
+docs_ai_system-design_llm-security.md:758: - 是否避免 Token Passthrough，并使用精细 scope 和资源级鉴权？
+docs_ai_system-design_llm-security.md:759: - 是否支持快速撤销授权、禁用组件和回滚版本？
+docs_ai_system-design_llm-security.md:763: - 代码和浏览器是否运行在受限工作区？
+docs_ai_system-design_llm-security.md:764: - 文件、网络、CPU、内存、进程数和执行时间是否有限制？
+docs_ai_system-design_llm-security.md:765: - Prompt、日志、Trace 和评测集中是否可能出现密钥或 PII？
+docs_ai_system-design_llm-security.md:766: - 数据留存、加密、访问控制和删除策略是否明确？
+docs_ai_system-design_llm-security.md:770: - 安全测试是否验证真实工具副作用，而不只检查模型文本？
+docs_ai_system-design_llm-security.md:771: - 是否统计攻击成功、越权操作、数据泄露、审批绕过和误拦截？
+docs_ai_system-design_llm-security.md:772: - 组件和策略变更后是否自动跑安全回归？
+docs_ai_system-design_llm-security.md:773: - 是否准备了禁用工具、吊销 Token、对账补偿和恢复流程？
